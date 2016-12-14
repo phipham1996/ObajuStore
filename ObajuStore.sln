@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObajuStore.Web", "ObajuStore.Web\ObajuStore.Web.csproj", "{24991876-C1EE-4F4E-B50A-518863FA7C6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObajuStore.Common", "ObajuStore.Common\ObajuStore.Common.csproj", "{5215136A-5057-45D8-9892-9868DCB0A917}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObajuStore.Model", "ObajuStore.Model\ObajuStore.Model.csproj", "{7DD2868E-20CD-4BE1-AAD9-733812993EAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObajuStore.Data", "ObajuStore.Data\ObajuStore.Data.csproj", "{17D46A23-5386-4931-BCE7-07D0C4ECBEB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObajuStore.Service", "ObajuStore.Service\ObajuStore.Service.csproj", "{4E85EA93-090A-4EB0-908F-D8B20C1F9822}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObajuStore.UnitTest", "ObajuStore.UnitTest\ObajuStore.UnitTest.csproj", "{57DAF5FC-99F5-4C24-90A0-37A494EF2FC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24991876-C1EE-4F4E-B50A-518863FA7C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24991876-C1EE-4F4E-B50A-518863FA7C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24991876-C1EE-4F4E-B50A-518863FA7C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24991876-C1EE-4F4E-B50A-518863FA7C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5215136A-5057-45D8-9892-9868DCB0A917}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5215136A-5057-45D8-9892-9868DCB0A917}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5215136A-5057-45D8-9892-9868DCB0A917}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5215136A-5057-45D8-9892-9868DCB0A917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD2868E-20CD-4BE1-AAD9-733812993EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD2868E-20CD-4BE1-AAD9-733812993EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD2868E-20CD-4BE1-AAD9-733812993EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD2868E-20CD-4BE1-AAD9-733812993EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17D46A23-5386-4931-BCE7-07D0C4ECBEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17D46A23-5386-4931-BCE7-07D0C4ECBEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17D46A23-5386-4931-BCE7-07D0C4ECBEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17D46A23-5386-4931-BCE7-07D0C4ECBEB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E85EA93-090A-4EB0-908F-D8B20C1F9822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E85EA93-090A-4EB0-908F-D8B20C1F9822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E85EA93-090A-4EB0-908F-D8B20C1F9822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E85EA93-090A-4EB0-908F-D8B20C1F9822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57DAF5FC-99F5-4C24-90A0-37A494EF2FC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57DAF5FC-99F5-4C24-90A0-37A494EF2FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57DAF5FC-99F5-4C24-90A0-37A494EF2FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57DAF5FC-99F5-4C24-90A0-37A494EF2FC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
