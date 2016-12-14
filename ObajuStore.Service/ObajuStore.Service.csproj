@@ -42,6 +42,20 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObajuStore.Common\ObajuStore.Common.csproj">
+      <Project>{5215136a-5057-45d8-9892-9868dcb0a917}</Project>
+      <Name>ObajuStore.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObajuStore.Data\ObajuStore.Data.csproj">
+      <Project>{17d46a23-5386-4931-bce7-07d0c4ecbeb9}</Project>
+      <Name>ObajuStore.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObajuStore.Model\ObajuStore.Model.csproj">
+      <Project>{7dd2868e-20cd-4be1-aad9-733812993eab}</Project>
+      <Name>ObajuStore.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

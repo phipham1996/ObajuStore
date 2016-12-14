@@ -188,6 +188,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ConnectionString.config" />
+    <Content Include="AppSetting.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -236,7 +238,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Api\" />
+    <Folder Include="app\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Assets\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Libs\" />
+    <Folder Include="Mapping\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -245,6 +253,24 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObajuStore.Common\ObajuStore.Common.csproj">
+      <Project>{5215136a-5057-45d8-9892-9868dcb0a917}</Project>
+      <Name>ObajuStore.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObajuStore.Data\ObajuStore.Data.csproj">
+      <Project>{17d46a23-5386-4931-bce7-07d0c4ecbeb9}</Project>
+      <Name>ObajuStore.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObajuStore.Model\ObajuStore.Model.csproj">
+      <Project>{7dd2868e-20cd-4be1-aad9-733812993eab}</Project>
+      <Name>ObajuStore.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObajuStore.Service\ObajuStore.Service.csproj">
+      <Project>{4e85ea93-090a-4eb0-908f-d8b20c1f9822}</Project>
+      <Name>ObajuStore.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
