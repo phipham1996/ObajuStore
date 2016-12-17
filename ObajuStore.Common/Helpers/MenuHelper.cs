@@ -7,7 +7,7 @@ namespace ObajuStore.Common.Helpers
     {
         public static string IsSelected(this HtmlHelper html, string controller = null, string action = null)
         {
-            const string cssClass = "actived";
+            const string cssClass = "active";
             var currentAction = (string)html.ViewContext.RouteData.Values["action"];
             var currentController = (string)html.ViewContext.RouteData.Values["controller"];
 

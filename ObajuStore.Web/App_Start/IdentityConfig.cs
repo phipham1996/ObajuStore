@@ -1,34 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using ObajuStore.Web.Models;
+using Microsoft.Owin.Security.DataProtection;
+using ObajuStore.Common.Helpers;
+using ObajuStore.Data;
+using ObajuStore.Model.Models;
+using System;
+using System.Net;
+using System.Net.Mail;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
-namespace ObajuStore.Web
+namespace ObajuStore.Web.App_Start
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var host = ConfigHelper.GetByKey("SMTPHost");
+            var port = int.Parse(ConfigHelper.GetByKey("SMTPPort"));
+            var fromEmail = ConfigHelper.GetByKey("FromEmailAddress");
+            var password = ConfigHelper.GetByKey("FromEmailPassword");
+
+            SmtpClient client = new SmtpClient();
+            client.Port = port;
+            client.Host = host;
+            client.EnableSsl = true;
+            client.Timeout = 10000;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential(fromEmail, password);
+
+            await client.SendMailAsync(fromEmail, message.Destination, message.Subject, message.Body);
         }
     }
 
-    public class SmsService : IIdentityMessageService
+    public class ApplicationUserStore : UserStore<ApplicationUser>
     {
-        public Task SendAsync(IdentityMessage message)
+        public ApplicationUserStore(ObajuStoreDbContext context)
+            : base(context)
         {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
         }
     }
 
@@ -38,53 +51,41 @@ namespace ObajuStore.Web
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
-        }
-
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
-        {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+            this.UserValidator = new UserValidator<ApplicationUser>(this)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
             };
 
             // Configure validation logic for passwords
-            manager.PasswordValidator = new PasswordValidator
+            this.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
                 RequireNonLetterOrDigit = true,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = false,
             };
 
             // Configure user lockout defaults
-            manager.UserLockoutEnabledByDefault = true;
-            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+            this.UserLockoutEnabledByDefault = true;
+            this.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            this.MaxFailedAccessAttemptsBeforeLockout = 5;
 
-            // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
-            // You can write your own provider and plug it in here.
-            manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser>
+            this.RegisterTwoFactorProvider("Mã bảo mật qua Email", new EmailTokenProvider<ApplicationUser>
             {
-                MessageFormat = "Your security code is {0}"
+                Subject = "Mã bảo mật",
+                BodyFormat = "Mã bảo mật của bạn là {0}"
             });
-            manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
-            {
-                Subject = "Security Code",
-                BodyFormat = "Your security code is {0}"
-            });
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
-            var dataProtectionProvider = options.DataProtectionProvider;
+            this.EmailService = new EmailService();
+            var dataProtectionProvider = Startup.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
-                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                IDataProtector dataProtector = dataProtectionProvider.Create("ASP.NET Identity");
+
+                this.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtector);
             }
-            return manager;
         }
     }
 
@@ -98,7 +99,7 @@ namespace ObajuStore.Web
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
         {
-            return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
+            return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager, DefaultAuthenticationTypes.ApplicationCookie);
         }
 
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)

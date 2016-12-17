@@ -3,6 +3,7 @@
     public class CommonConstants
     {
         public const string ProductTag = "product";
+        public const string ADMIN_SESSION = "ADMIN_SESSION";
         public const string PostTag = "post";
         public const string DefaultFooter = "default";
         public const string ShoppingCartSession = "ShoppingCartSession";
@@ -16,5 +17,9 @@
         public const string HomeMetaDescription = "HomeMetaDescription";
 
         public const string TextXlsx = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+        public const string MEM = "MEM";
+        public const string ADMIN = "ADMIN";
+        public const string MAN = "MAN";
     }
 }

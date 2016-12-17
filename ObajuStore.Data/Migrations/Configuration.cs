@@ -1,5 +1,6 @@
 ﻿namespace ObajuStore.Data.Migrations
 {
+    using Common;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Model.Models;
@@ -16,7 +17,7 @@
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ObajuStore.Data.ObajuStoreDbContext context)
+        protected override void Seed(ObajuStoreDbContext context)
         {
             CreateUser(context);
             BrandDefault(context);
@@ -37,27 +38,32 @@
 
                 var user = new ApplicationUser()
                 {
-                    UserName = "dvbtham",
+                    UserName = "dvbtham@gmail.com",
                     Email = "dvbtham@gmail.com",
                     EmailConfirmed = true,
-                    BirthDay = Convert.ToDateTime("15/09/1996"),
+                    BirthDay = DateTime.Now,
                     Gender = "Nam",
+                    Image = CommonConstants.DefaultAvatar,
                     FullName = "Thâm David",
                     Address = "Gia Lai",
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = "system",
+                    PhoneNumberConfirmed = true,
                     PhoneNumber = "01652130546"
                 };
 
-                manager.Create(user, "123123$");
+                manager.Create(user, "Tham1996$");
 
                 if (!roleManager.Roles.Any())
                 {
-                    roleManager.Create(new IdentityRole { Name = "Admin" });
-                    roleManager.Create(new IdentityRole { Name = "User" });
+                    roleManager.Create(new IdentityRole { Name = CommonConstants.ADMIN });
+                    roleManager.Create(new IdentityRole { Name = CommonConstants.MAN });
+                    roleManager.Create(new IdentityRole { Name = CommonConstants.MEM });
                 }
 
                 var adminUser = manager.FindByEmail("dvbtham@gmail.com");
 
-                manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+                manager.AddToRoles(adminUser.Id, new string[] { CommonConstants.ADMIN, CommonConstants.MAN, CommonConstants.MEM });
             }
         }
 
@@ -70,7 +76,6 @@
                     Name = "Không xác định",
                     Alias = "khong-xac-dinh",
                     CreatedBy = "system",
-                    Image = "",
                     Status = true
                 };
                 context.Brands.Add(brand);
@@ -86,13 +91,13 @@
                 {
                     var contactDetail = new ContactDetail()
                     {
-                        Name = "Shop online - ObajuStore",
+                        Name = "Shop online - Obaju Store",
                         Address = "472 Núi Thành",
                         Phone = "016 5213 0546",
                         Email = "dvbtham@gmail.com",
                         Lat = 16.034562,
                         Lng = 108.222603,
-                        Website = "http://ObajuStore.com.vn",
+                        Website = "http://obajustore.com.vn",
                         Description = "",
                         Status = true
                     };
@@ -112,7 +117,7 @@
                 context.SystemConfigs.Add(new SystemConfig()
                 {
                     Code = "HomeTitle",
-                    ValueString = "Trang chủ Obaju Store - nơi mua bán uy tín và chất lượng - ObajuStore.com"
+                    ValueString = "Trang chủ Obaju Store shop - nơi mua bán uy tín và chất lượng - ObajuStore.com"
                 });
             }
             if (!context.SystemConfigs.Any(x => x.Code == "HomeMetaKeyword"))
@@ -120,7 +125,7 @@
                 context.SystemConfigs.Add(new SystemConfig()
                 {
                     Code = "HomeMetaKeyword",
-                    ValueString = "Trang chủ Obaju Store - nơi mua bán uy tín và chất lượng - ObajuStore.com"
+                    ValueString = "Trang chủ Obaju Store shop - nơi mua bán uy tín và chất lượng - ObajuStore.com"
                 });
             }
             if (!context.SystemConfigs.Any(x => x.Code == "HomeMetaDescription"))
@@ -128,7 +133,7 @@
                 context.SystemConfigs.Add(new SystemConfig()
                 {
                     Code = "HomeMetaDescription",
-                    ValueString = "Trang chủ Obaju Store - nơi mua bán uy tín và chất lượng - ObajuStore.com"
+                    ValueString = "Trang chủ Obaju Store shop - nơi mua bán uy tín và chất lượng - ObajuStore.com"
                 });
             }
         }
@@ -146,7 +151,7 @@
                         CreatedDate = DateTime.Now,
                         MetaDescription = "Trang giới thiệu của Obaju Store",
                         MetaKeyword = "Trang giới thiệu của Obaju Store",
-                        Content = @"Là trang web bán hàng online, chuyên cung cấp món hàng trong lĩnh vực thiết bị số: Điện thoại, máy tính cá nhân, máy ảnh,... và một số dịch vụ kèm theo khi mua hàng.",
+                        Content = @"Là trang web bán hàng online, tại đây khách hàng có thể tự tạo áo của mình theo mẫu và có thể thử mặc áo online.",
                         Status = true
                     };
                     context.Pages.Add(page);
