@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ObajuStore.Data.Infrastructure;
 using ObajuStore.Data.Repositories;
 using ObajuStore.Model.Models;
+using System.Linq;
 
 namespace ObajuStore.Service
 {
@@ -11,6 +12,8 @@ namespace ObajuStore.Service
         ApplicationUser GetUserById(string userId);
 
         IEnumerable<string> GetUserIdByGroupId(int id);
+
+        IEnumerable<ApplicationUser> GetUserListPaging(int page, int pageSize, string filter, out int totalRow);
 
         void SetViewed(string id);
     }
@@ -42,6 +45,20 @@ namespace ObajuStore.Service
         public IEnumerable<string> GetUserIdByGroupId(int id)
         {
             return _applicationUserRepository.GetUserIdByGroupId(id);
+        }
+
+        public IEnumerable<ApplicationUser> GetUserListPaging(int page, int pageSize, string filter, out int totalRow)
+        {
+            var query = _applicationUserRepository.GetMulti(x => x.UserName.Contains(filter));
+            if (string.IsNullOrEmpty(filter))
+            {
+                query = _applicationUserRepository.GetAll();
+                totalRow = query.Count();
+                return query.Skip((page - 1) * pageSize).Take(pageSize);
+            }
+            totalRow = query.Count();
+
+            return query.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
         public void SetViewed(string id)

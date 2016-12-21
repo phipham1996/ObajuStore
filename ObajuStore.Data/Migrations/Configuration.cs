@@ -1,6 +1,7 @@
 ﻿namespace ObajuStore.Data.Migrations
 {
     using Common;
+    using Common.Helpers;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Model.Models;
@@ -36,23 +37,26 @@
 
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ObajuStoreDbContext()));
 
+                var adminUsername = ConfigHelper.GetByKey("AdminUsername");
+                var adminPassword = ConfigHelper.GetByKey("AdminPassword");
                 var user = new ApplicationUser()
                 {
-                    UserName = "dvbtham@gmail.com",
-                    Email = "dvbtham@gmail.com",
+
+                    UserName = adminUsername,
+                    Email = adminUsername,
                     EmailConfirmed = true,
-                    BirthDay = DateTime.Now,
+                    BirthDay = Convert.ToDateTime("15/09/1996"),
                     Gender = "Nam",
                     Image = CommonConstants.DefaultAvatar,
-                    FullName = "Thâm David",
-                    Address = "Gia Lai",
+                    FullName = "David Thâm",
+                    Address = "Mang Yang - Gia Lai",
                     CreatedDate = DateTime.Now,
                     CreatedBy = "system",
                     PhoneNumberConfirmed = true,
                     PhoneNumber = "01652130546"
                 };
 
-                manager.Create(user, "Tham1996$");
+                manager.Create(user, adminPassword);
 
                 if (!roleManager.Roles.Any())
                 {
@@ -61,7 +65,7 @@
                     roleManager.Create(new IdentityRole { Name = CommonConstants.MEM });
                 }
 
-                var adminUser = manager.FindByEmail("dvbtham@gmail.com");
+                var adminUser = manager.FindByEmail(adminUsername);
 
                 manager.AddToRoles(adminUser.Id, new string[] { CommonConstants.ADMIN, CommonConstants.MAN, CommonConstants.MEM });
             }

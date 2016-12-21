@@ -186,6 +186,9 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Areas\AdminObajuStore\AdminObajuStoreAreaRegistration.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\AccountController.cs" />
+    <Compile Include="Areas\AdminObajuStore\Controllers\ApplicationGroupController.cs" />
+    <Compile Include="Areas\AdminObajuStore\Controllers\ApplicationRoleController.cs" />
+    <Compile Include="Areas\AdminObajuStore\Controllers\ApplicationUserController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\BaseController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminObajuStore\Models\HomeViewModel.cs" />
@@ -1215,6 +1218,7 @@
     <Content Include="Assets\Client\css\fonts\fontawesome-webfont.ttf" />
     <Content Include="Assets\Client\css\fonts\fontawesome-webfont.woff" />
     <Content Include="Assets\Client\css\fonts\FontAwesome.otf" />
+    <Content Include="Areas\AdminObajuStore\Views\ApplicationUser\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1265,6 +1269,8 @@
     <Folder Include="app\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AdminObajuStore\Views\Account\" />
+    <Folder Include="Areas\AdminObajuStore\Views\ApplicationGroup\" />
+    <Folder Include="Areas\AdminObajuStore\Views\ApplicationRole\" />
     <Folder Include="Areas\AdminObajuStore\Views\Base\" />
     <Folder Include="Libs\" />
     <Folder Include="UploadedFiles\" />

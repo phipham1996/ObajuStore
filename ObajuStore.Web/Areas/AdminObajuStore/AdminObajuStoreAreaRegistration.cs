@@ -17,8 +17,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore
             context.MapRoute(
                 "AdminObajuStore_default",
                 "AdminObajuStore/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "ObajuStore.Web.Areas.AdminObajuStore.Controllers" }
+                new { action = "Index", id = UrlParameter.Optional }
             );
         }
     }

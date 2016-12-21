@@ -57,9 +57,11 @@ h1 {
 #top ul.menu > li {
   display: inline-block;
 }
+
 #top ul.menu > li a {
   color: #eeeeee;
 }
+
 #top ul.menu > li + li:before {
   content: "|\00a0";
   padding: 0 5px;

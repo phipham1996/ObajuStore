@@ -27,7 +27,7 @@
     <link href="~/Assets/Client/css/owl.theme.css" rel="stylesheet">
 
     <!-- theme stylesheet -->
-    <link href="~/Assets/Client/css/style.green.css" rel="stylesheet" id="theme-stylesheet">
+    <link href="~/Assets/Client/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
 
     <!-- your stylesheet with modifications -->
     <link href="~/Assets/Client/css/custom.css" rel="stylesheet">
@@ -49,42 +49,7 @@
             <div class="col-md-6 offer" data-animate="fadeInDown">
                 <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 35% off on orders over $50!</a>
             </div>
-            <div class="col-md-6" data-animate="fadeInDown">
-                <ul class="menu">
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li>
-                            <a href="/Manage">@User.Identity.Name</a>
-                        </li>
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logOffForm" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <li>
-                                <a href="javascript:document.getElementById('logOffForm').submit()">Thoát</a>
-                            </li>
-                        }
-                    }
-                    else
-                    {
-                        <li>
-                            <a href="/login.htm">Đăng nhập</a>
-                        </li>
-                        <li>
-                            <a href="/register.htm">Đăng ký</a>
-                        </li>
-                    }
-                    
-                    <li>
-                        <a href="/contact.htm">Contact</a>
-                    </li>
-                    @if (User.IsInRole("ADMIN"))
-                    {
-                        <li>
-                            <a href="/ObajuAdmin/Home">Quản trị hệ thống</a>
-                        </li>
-                    }
-                </ul>
-            </div>
+           @Html.Partial("_LoginPartial")
         </div>
 
     </div>

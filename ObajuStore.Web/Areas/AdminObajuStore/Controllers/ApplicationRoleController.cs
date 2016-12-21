@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
 {
-    public class AccountController : BaseController
+    public class ApplicationRoleController : Controller
     {
-        // GET: AdminObajuStore/Account
+        // GET: AdminObajuStore/ApplicationRole
         public ActionResult Index()
         {
             return View();

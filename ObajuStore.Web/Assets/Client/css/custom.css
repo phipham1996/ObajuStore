@@ -4,3 +4,9 @@
     margin-bottom: 20px;
     padding-bottom: 20px;
 }
+#top ul.menu > li.formLogOff + li.formLogOff:before {
+  content: "";
+
+}
+
+

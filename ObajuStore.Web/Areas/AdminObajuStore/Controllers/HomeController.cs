@@ -6,8 +6,7 @@ using System.Web.Mvc;
 
 namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
 {
-    [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         // GET: AdminObajuStore/Home
         public ActionResult Index()

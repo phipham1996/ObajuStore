@@ -4,6 +4,7 @@ using Microsoft.Owin.Security;
 using ObajuStore.Common;
 using ObajuStore.Helpers.Common;
 using ObajuStore.Model.Models;
+using ObajuStore.Service;
 using ObajuStore.Web.App_Start;
 using ObajuStore.Web.Models;
 using System;
@@ -20,15 +21,18 @@ namespace ObajuStore.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationGroupService _userGroup;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager,
+            ApplicationSignInManager signInManager, ApplicationGroupService userGroup)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _userGroup = userGroup;
         }
 
         public ApplicationSignInManager SignInManager
@@ -63,7 +67,7 @@ namespace ObajuStore.Web.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
+        #region Login
         //
         // POST: /Account/Login
         [HttpPost]
@@ -103,7 +107,9 @@ namespace ObajuStore.Web.Controllers
                     return View(model);
             }
         }
+        #endregion
 
+        #region VerifyCode
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -148,7 +154,7 @@ namespace ObajuStore.Web.Controllers
                     return View(model);
             }
         }
-
+        #endregion
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -198,12 +204,15 @@ namespace ObajuStore.Web.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    var adminUser = await _userManager.FindByEmailAsync(registerVm.Email);
-                    if (adminUser != null)
-                        await _userManager.AddToRolesAsync(adminUser.Id, new string[] { CommonConstants.MEM });
+                    var userModel = await _userManager.FindByEmailAsync(registerVm.Email);
+                    if (userModel != null)
+                    {
+                        await _userManager.AddToRolesAsync(userModel.Id, new string[] { CommonConstants.MEM });
+                    }
+
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Kích hoạt tài khoản Obaju Store", "Kích hoạt tài khoản của bạn bằng cách <a href=\"" + callbackUrl + "\">click vào đây.</a>");
+                    //await UserManager.SendEmailAsync(user.Id, "Kích hoạt tài khoản Obaju Store", "Kích hoạt tài khoản của bạn bằng cách <a href=\"" + callbackUrl + "\">click vào đây.</a>");
                     MailHelper.SendMail(registerVm.Email, "Kích hoạt tài khoản Obaju Store", "Kích hoạt tài khoản của bạn bằng cách <a href=\"" + callbackUrl + "\">click vào đây.</a>");
                     return View("DisplayEmail");
                 }
@@ -252,10 +261,10 @@ namespace ObajuStore.Web.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Đặt lại mật khẩu", "Để đặt lại mật khẩu, vui lòng <a href=\"" + callbackUrl + "\"> click theo đường dẫn này</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
