@@ -11,10 +11,7 @@ namespace ObajuStore.Data
         {
             this.Configuration.LazyLoadingEnabled = true;
         }
-        public DbSet<ApplicationGroup> ApplicationGroups { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
-        public DbSet<ApplicationRoleGroup> ApplicationRoleGroups { get; set; }
-        public DbSet<ApplicationUserGroup> ApplicationUserGroups { get; set; }
         public DbSet<Error> Errors { get; set; }
         public DbSet<Footer> Footers { get; set; }
         public DbSet<Menu> Menus { get; set; }

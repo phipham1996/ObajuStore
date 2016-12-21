@@ -14,6 +14,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+
             context.MapRoute(
                 "AdminObajuStore_default",
                 "AdminObajuStore/{controller}/{action}/{id}",

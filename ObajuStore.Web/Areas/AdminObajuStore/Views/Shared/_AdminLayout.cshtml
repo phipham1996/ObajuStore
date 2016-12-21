@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="~/Assets/Admin/plugins/daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="~/Assets/Admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
+    @RenderSection("styles", required: false)
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -319,7 +319,7 @@
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
-               <hr />
+                <hr />
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
@@ -358,6 +358,12 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div id="AlertBox" class="alert @TempData["AlertType"]">
+                    @TempData["AlertMessage"]
+                </div>
+            }
             @RenderBody()
         </div>
         <!-- /.content-wrapper -->
@@ -570,7 +576,7 @@
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-  $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.6 -->
     <script src="~/Assets/Libs/bootstrap/js/bootstrap.min.js"></script>
@@ -601,6 +607,8 @@
     <script src="~/Assets/Admin/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Assets/Admin/js/demo.js"></script>
+    <script src="~/Assets/Libs/ckeditor/ckeditor.js"></script>
+    <script src="~/Assets/Libs/ckfinder/ckfinder.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
-

@@ -11,7 +11,10 @@
                     @Html.ActionLink("Xin chào " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                 </li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Thoát</a></li>
-                <li><a href="/AdminObajuStore/Home">Admin</a></li>
+                @if (User.IsInRole(ObajuStore.Common.CommonConstants.ADMIN))
+                {
+                    <li><a href="/AdminObajuStore/Home">Admin</a></li>
+                }
 
             </ul>
         }

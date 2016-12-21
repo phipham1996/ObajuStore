@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ObajuStore.Common.Exceptions;
 using ObajuStore.Data.Infrastructure;
@@ -21,26 +22,18 @@ namespace ObajuStore.Service
 
         void Delete(string id);
 
-        //Add roles to a sepcify group
-        bool AddRolesToGroup(IEnumerable<ApplicationRoleGroup> roleGroups, int groupId);
-
-        //Get list role by group id
-        IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId);
-
         void Save();
     }
 
     public class ApplicationRoleService : IApplicationRoleService
     {
         private IApplicationRoleRepository _appRoleRepository;
-        private IApplicationRoleGroupRepository _appRoleGroupRepository;
         private IUnitOfWork _unitOfWork;
 
         public ApplicationRoleService(IUnitOfWork unitOfWork,
-            IApplicationRoleRepository appRoleRepository, IApplicationRoleGroupRepository appRoleGroupRepository)
+            IApplicationRoleRepository appRoleRepository)
         {
             this._appRoleRepository = appRoleRepository;
-            this._appRoleGroupRepository = appRoleGroupRepository;
             this._unitOfWork = unitOfWork;
         }
 
@@ -50,17 +43,6 @@ namespace ObajuStore.Service
                 throw new NameDuplicatedException("Tên không được trùng");
             return _appRoleRepository.Add(appRole);
         }
-
-        public bool AddRolesToGroup(IEnumerable<ApplicationRoleGroup> roleGroups, int groupId)
-        {
-            _appRoleGroupRepository.DeleteMulti(x => x.GroupId == groupId);
-            foreach (var roleGroup in roleGroups)
-            {
-                _appRoleGroupRepository.Add(roleGroup);
-            }
-            return true;
-        }
-
         public void Delete(string id)
         {
             _appRoleRepository.DeleteMulti(x => x.Id == id);
@@ -86,6 +68,7 @@ namespace ObajuStore.Service
             return _appRoleRepository.GetSingleByCondition(x => x.Id == id);
         }
 
+
         public void Save()
         {
             _unitOfWork.Commit();
@@ -98,9 +81,6 @@ namespace ObajuStore.Service
             _appRoleRepository.Update(AppRole);
         }
 
-        public IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId)
-        {
-            return _appRoleRepository.GetListRoleByGroupId(groupId);
-        }
+
     }
 }

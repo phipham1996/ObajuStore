@@ -11,11 +11,9 @@ namespace ObajuStore.Service
     {
         ApplicationUser GetUserById(string userId);
 
-        IEnumerable<string> GetUserIdByGroupId(int id);
-
         IEnumerable<ApplicationUser> GetUserListPaging(int page, int pageSize, string filter, out int totalRow);
 
-        void SetViewed(string id);
+        void SetDeleted(string id);
     }
 
     public class ApplicationUserService : IApplicationUserService
@@ -42,17 +40,14 @@ namespace ObajuStore.Service
             }
         }
 
-        public IEnumerable<string> GetUserIdByGroupId(int id)
-        {
-            return _applicationUserRepository.GetUserIdByGroupId(id);
-        }
+
 
         public IEnumerable<ApplicationUser> GetUserListPaging(int page, int pageSize, string filter, out int totalRow)
         {
-            var query = _applicationUserRepository.GetMulti(x => x.UserName.Contains(filter));
+            var query = _applicationUserRepository.GetMulti(x => x.UserName.Contains(filter) || x.FullName.Contains(filter) && x.IsDeleted == false);
             if (string.IsNullOrEmpty(filter))
             {
-                query = _applicationUserRepository.GetAll();
+                query = _applicationUserRepository.GetMulti(x => x.IsDeleted == false);
                 totalRow = query.Count();
                 return query.Skip((page - 1) * pageSize).Take(pageSize);
             }
@@ -61,10 +56,10 @@ namespace ObajuStore.Service
             return query.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
-        public void SetViewed(string id)
+        public void SetDeleted(string id)
         {
             var user = _applicationUserRepository.GetSingleById(id);
-            user.IsViewed = true;
+            user.IsDeleted = true;
             _applicationUserRepository.Update(user);
             _unitOfWork.Commit();
 

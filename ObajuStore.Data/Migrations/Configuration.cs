@@ -11,11 +11,11 @@
     using System.Diagnostics;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ObajuStore.Data.ObajuStoreDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ObajuStoreDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ObajuStoreDbContext context)

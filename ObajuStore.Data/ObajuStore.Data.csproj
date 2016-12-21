@@ -68,13 +68,26 @@
     <Compile Include="Migrations\201612161801380_InitialDB.Designer.cs">
       <DependentUpon>201612161801380_InitialDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612211115433_RemoveApplicationGroup.cs" />
+    <Compile Include="Migrations\201612211115433_RemoveApplicationGroup.Designer.cs">
+      <DependentUpon>201612211115433_RemoveApplicationGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612211417155_AddColIsDelete.cs" />
+    <Compile Include="Migrations\201612211417155_AddColIsDelete.Designer.cs">
+      <DependentUpon>201612211417155_AddColIsDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612211500031_UpdateDatabase.cs" />
+    <Compile Include="Migrations\201612211500031_UpdateDatabase.Designer.cs">
+      <DependentUpon>201612211500031_UpdateDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612211646468_addBioToAppUser.cs" />
+    <Compile Include="Migrations\201612211646468_addBioToAppUser.Designer.cs">
+      <DependentUpon>201612211646468_addBioToAppUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ObajuStoreDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ApplicationGroupRepository.cs" />
-    <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleRepository.cs" />
-    <Compile Include="Repositories\ApplicationUserGroupRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Repositories\BrandRepository.cs" />
     <Compile Include="Repositories\ContactDetailRepository.cs" />
@@ -118,6 +131,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612161801380_InitialDB.resx">
       <DependentUpon>201612161801380_InitialDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612211115433_RemoveApplicationGroup.resx">
+      <DependentUpon>201612211115433_RemoveApplicationGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612211417155_AddColIsDelete.resx">
+      <DependentUpon>201612211417155_AddColIsDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612211500031_UpdateDatabase.resx">
+      <DependentUpon>201612211500031_UpdateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612211646468_addBioToAppUser.resx">
+      <DependentUpon>201612211646468_addBioToAppUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -172,12 +172,6 @@ namespace ObajuStore.Web.Infrastructure.Extensions
             order.Status = orderViewModel.Status;
         }
 
-        public static void UpdateApplicationGroup(this ApplicationGroup appGroup, ApplicationGroupViewModel appGroupViewModel)
-        {
-            appGroup.ID = appGroupViewModel.ID;
-            appGroup.Name = appGroupViewModel.Name;
-            appGroup.Description = appGroupViewModel.Description;
-        }
 
         public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "add")
         {
@@ -196,9 +190,11 @@ namespace ObajuStore.Web.Infrastructure.Extensions
             appUser.BirthDay = appUserViewModel.BirthDay;
             appUser.Email = appUserViewModel.Email;
             appUser.Image = appUserViewModel.Image;
-            appUser.UserName = appUserViewModel.UserName;
+            appUser.UserName = appUserViewModel.Email;
+            appUser.Bio = appUserViewModel.Bio;
             appUser.PhoneNumber = appUserViewModel.PhoneNumber;
             appUser.Gender = appUserViewModel.Gender;
+            appUser.IsDeleted = appUserViewModel.IsDeleted;
             appUser.CreatedDate = appUserViewModel.CreatedDate;
             appUser.UpdatedDate = appUserViewModel.UpdatedDate;
 

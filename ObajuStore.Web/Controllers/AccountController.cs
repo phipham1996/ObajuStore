@@ -21,18 +21,16 @@ namespace ObajuStore.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private ApplicationGroupService _userGroup;
 
         public AccountController()
         {
         }
 
         public AccountController(ApplicationUserManager userManager,
-            ApplicationSignInManager signInManager, ApplicationGroupService userGroup)
+            ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-            _userGroup = userGroup;
         }
 
         public ApplicationSignInManager SignInManager
@@ -188,7 +186,7 @@ namespace ObajuStore.Web.Controllers
                 {
                     UserName = registerVm.Email,
                     Email = registerVm.Email,
-                    IsViewed = false,
+                    IsDeleted = false,
                     EmailConfirmed = false,
                     Gender = registerVm.Gender,
                     Image = CommonConstants.DefaultAvatar,

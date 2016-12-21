@@ -23,6 +23,9 @@ namespace ObajuStore.Model.Models
         [MaxLength(20)]
         public string Gender { get; set; }
 
+        [MaxLength(700)]
+        public string Bio { get; set; }
+
         [Column(TypeName = "varchar")]
         [MaxLength(256)]
         public string Image { get; set; }
@@ -38,7 +41,7 @@ namespace ObajuStore.Model.Models
         [MaxLength(128)]
         public string CreatedBy { get; set; }
 
-        public bool IsViewed { get; set; }
+        public bool IsDeleted { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {

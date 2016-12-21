@@ -425,6 +425,12 @@
 
         <div id="content">
             <div class="container">
+                @if (TempData["AlertMessage"] != null)
+                {
+                    <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                        @TempData["AlertMessage"]
+                    </div>
+                }
                 @RenderBody()
             </div>
 
