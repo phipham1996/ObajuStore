@@ -8,7 +8,7 @@ namespace ObajuStore.Model.Models
         public ApplicationRole() : base()
         {
         }
-
+        public bool? IsDeleted { get; set; }
         [MaxLength(500)]
         public string Description { get; set; }
     }

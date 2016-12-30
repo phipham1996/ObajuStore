@@ -101,7 +101,8 @@
 
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Thêm" class="btn btn-default" />
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu lại</button>
+                                    @Html.ActionLink("Hủy", "Index", new { controller = "ApplicationUser" }, new { @class = "btn btn-default custom" })
                                 </div>
                             </div>
                         </div>

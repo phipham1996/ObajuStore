@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ObajuStore.Model.Models;
 using ObajuStore.Web.Models;
+using System.Collections.Generic;
 
 namespace ObajuStore.Web.Mappings
 {
@@ -32,5 +33,6 @@ namespace ObajuStore.Web.Mappings
                 x.CreateMap<ApplicationUser, ApplicationUserViewModel>();
             });
         }
+
     }
 }

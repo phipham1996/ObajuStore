@@ -48,6 +48,8 @@ namespace ObajuStore.Model.Models
         [MaxLength(128)]
         public string CustomerId { get; set; }
 
+        public bool? IsDeleted { get; set; }
+
         [ForeignKey("CustomerId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 

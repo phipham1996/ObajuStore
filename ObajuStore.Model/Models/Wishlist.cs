@@ -15,6 +15,8 @@ namespace ObajuStore.Model.Models
 
         public long ProductId { get; set; }
 
+        public bool? IsDeleted { get; set; }
+
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 

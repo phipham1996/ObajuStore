@@ -79,9 +79,11 @@
     <Compile Include="Exceptions\WorkSheetNotFoundException.cs" />
     <Compile Include="Extensions\DistinctBy.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\PropertyByName.cs" />
     <Compile Include="Extensions\PropertyManager.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Helpers\DropdownListForHelper.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Helpers\PaginationHelper.cs" />

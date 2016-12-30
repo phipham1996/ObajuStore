@@ -1,6 +1,7 @@
 ﻿using System;
 using ObajuStore.Model.Models;
 using ObajuStore.Web.Models;
+using ObajuStore.Common.Helpers;
 
 namespace ObajuStore.Web.Infrastructure.Extensions
 {
@@ -10,7 +11,7 @@ namespace ObajuStore.Web.Infrastructure.Extensions
         {
             postCategory.ID = postCategoryViewModel.ID;
             postCategory.Name = postCategoryViewModel.Name;
-            postCategory.Alias = postCategoryViewModel.Alias;
+            postCategory.Alias = StringHelper.ToUnsignString(postCategoryViewModel.Name);
 
             postCategory.Description = postCategoryViewModel.Description;
             postCategory.ParentID = postCategoryViewModel.ParentID;
@@ -31,7 +32,7 @@ namespace ObajuStore.Web.Infrastructure.Extensions
         {
             post.ID = postViewModel.ID;
             post.Name = postViewModel.Name;
-            post.Alias = postViewModel.Alias;
+            post.Alias = StringHelper.ToUnsignString(postViewModel.Name);
 
             post.Description = postViewModel.Description;
             post.CategoryID = postViewModel.CategoryID;
@@ -54,7 +55,7 @@ namespace ObajuStore.Web.Infrastructure.Extensions
         {
             productCategory.ID = productCategoryViewModel.ID;
             productCategory.Name = productCategoryViewModel.Name;
-            productCategory.Alias = productCategoryViewModel.Alias;
+            productCategory.Alias = StringHelper.ToUnsignString(productCategoryViewModel.Name);
 
             productCategory.Description = productCategoryViewModel.Description;
             productCategory.ParentID = productCategoryViewModel.ParentID;
@@ -75,7 +76,7 @@ namespace ObajuStore.Web.Infrastructure.Extensions
         {
             product.ID = productViewModel.ID;
             product.Name = productViewModel.Name;
-            product.Alias = productViewModel.Alias;
+            product.Alias = StringHelper.ToUnsignString(productViewModel.Alias);
 
             product.Description = productViewModel.Description;
             product.CategoryID = productViewModel.CategoryID;
@@ -129,7 +130,7 @@ namespace ObajuStore.Web.Infrastructure.Extensions
 
             brand.Description = brandViewModel.Description;
             brand.Image = brandViewModel.Image;
-            brand.Alias = brandViewModel.Alias;
+            brand.Alias = StringHelper.ToUnsignString(brandViewModel.Alias);
             brand.Country = brandViewModel.Country;
             brand.Website = brandViewModel.Website;
             brand.HotFlag = brandViewModel.HotFlag;
@@ -180,6 +181,7 @@ namespace ObajuStore.Web.Infrastructure.Extensions
             else
                 appRole.Id = Guid.NewGuid().ToString();
             appRole.Name = appRoleViewModel.Name;
+            appRole.IsDeleted = appRoleViewModel.IsDeleted;
             appRole.Description = appRoleViewModel.Description;
         }
 

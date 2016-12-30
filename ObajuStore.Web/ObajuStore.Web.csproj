@@ -192,6 +192,7 @@
     <Compile Include="Areas\AdminObajuStore\Controllers\ApplicationRoleController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\ApplicationUserController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\BaseController.cs" />
+    <Compile Include="Areas\AdminObajuStore\Controllers\CategoryController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminObajuStore\Models\HomeViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -201,7 +202,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Core\PaginationSet.cs" />
+    <Compile Include="Infrastructure\Extensions\CategoryExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
+    <Compile Include="Infrastructure\Helpers\SelectListHelper.cs" />
     <Compile Include="Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleViewModel.cs" />
@@ -232,7 +235,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Admin\js\alertSetting.js" />
     <Content Include="Assets\Admin\css\custom.css" />
+    <Content Include="Assets\Admin\js\deleteCategory.js" />
+    <Content Include="Assets\Admin\js\deleteRole.js" />
     <Content Include="Assets\Admin\js\deleteUser.js" />
     <Content Include="Assets\Client\templates\contactTemplate.html" />
     <Content Include="Assets\Client\templates\newUser.html" />
@@ -2265,6 +2271,12 @@
     <Content Include="Assets\Libs\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Assets\Libs\ckfinder\userfiles\.htaccess" />
     <Content Include="Areas\AdminObajuStore\Views\ApplicationUser\Edit.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\ApplicationRole\Index.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\ApplicationRole\Create.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\ApplicationRole\Edit.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\Category\Index.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\Category\Create.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\Category\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -2316,7 +2328,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AdminObajuStore\Views\Account\" />
     <Folder Include="Areas\AdminObajuStore\Views\ApplicationGroup\" />
-    <Folder Include="Areas\AdminObajuStore\Views\ApplicationRole\" />
     <Folder Include="Areas\AdminObajuStore\Views\Base\" />
     <Folder Include="Assets\Libs\ckfinder\bin-debug\" />
     <Folder Include="Assets\Libs\ckfinder\bin\" />

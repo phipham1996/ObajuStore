@@ -11,6 +11,8 @@ namespace ObajuStore.Service
     {
         ApplicationUser GetUserById(string userId);
 
+        ApplicationUser GetUserByName(string userName);
+
         IEnumerable<ApplicationUser> GetUserListPaging(int page, int pageSize, string filter, out int totalRow);
 
         void SetDeleted(string id);
@@ -40,17 +42,17 @@ namespace ObajuStore.Service
             }
         }
 
-
+        public ApplicationUser GetUserByName(string userName)
+        {
+            return _applicationUserRepository.GetSingleById(userName);
+        }
 
         public IEnumerable<ApplicationUser> GetUserListPaging(int page, int pageSize, string filter, out int totalRow)
         {
             var query = _applicationUserRepository.GetMulti(x => x.UserName.Contains(filter) || x.FullName.Contains(filter) && x.IsDeleted == false);
             if (string.IsNullOrEmpty(filter))
-            {
                 query = _applicationUserRepository.GetMulti(x => x.IsDeleted == false);
-                totalRow = query.Count();
-                return query.Skip((page - 1) * pageSize).Take(pageSize);
-            }
+
             totalRow = query.Count();
 
             return query.Skip((page - 1) * pageSize).Take(pageSize);

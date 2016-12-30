@@ -1,7 +1,7 @@
-﻿@model ObajuStore.Web.Infrastructure.Core.PaginationSet<ObajuStore.Web.Models.ApplicationUserViewModel>
+﻿@model ObajuStore.Web.Infrastructure.Core.PaginationSet<ObajuStore.Web.Models.ProductCategoryViewModel>
 
 @{
-    ViewBag.Title = "Danh sách người dùng";
+    ViewBag.Title = "Danh sách danh mục";
     Layout = "~/Areas/AdminObajuStore/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -10,7 +10,7 @@
         @ViewBag.Title.ToUpper()
     </h1>
     <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li><a href="/AdminObajuStore/Home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
         <li class="active">@ViewBag.Title</li>
     </ol>
 </section>
@@ -22,16 +22,16 @@
                 <div class="box-header">
                     <div class="col-md-12">
                         <div class="col-md-8">
-                            @using (Html.BeginForm("Index", "ApplicationUser", FormMethod.Get))
+                            @using (Html.BeginForm("Index", "Category", FormMethod.Get))
                             {
                                 <div class="form-inline">
-                                    <input type="text" id="filter" value="@ViewBag.Filter" name="filter" class="form-control " placeholder="Nhập từ khóa..." />
+                                    <input type="text" id="filter" value="@ViewBag.Filter" name="q" class="form-control " placeholder="Nhập từ khóa..." />
                                     <input type="submit" class="btn btn-primary" value="Tìm kiếm" />
                                 </div>
                             }
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> @Html.ActionLink("Thêm mới", "Create", new { controller = "ApplicationUser" }, new { @class = "non-decoration" })</button>
+                            <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> @Html.ActionLink("Thêm mới", "Create", new { controller = "Category" }, new { @class = "non-decoration" })</button>
                         </div>
                     </div>
                 </div><!-- /.box-header -->
@@ -40,25 +40,22 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Tên người dùng</th>
-                                    <th>Ngày sinh</th>
-                                    <th>Tài khoản</th>
-                                    <th>Email</th>
+                                    <th>Tên danh mục</th>
+                                    <th>Danh mục cha</th>
+                                    <th>Mô tả</th>
                                     <th style="width:15%">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var user in Model.Items)
+                                @foreach (var category in Model.Items)
                                 {
                                     <tr>
-                                        <td><a href="/AdminObajuStore/ApplicationUser/Edit/@user.Id">@user.FullName</a></td>
-                                        <td>@user.BirthDay.ToShortDateString()</td>
-                                        <td><a href="/AdminObajuStore/ApplicationUser/Edit/@user.Id">@user.UserName</a></td>
-                                        <td>@user.Email</td>
+                                        <td><a href="/AdminObajuStore/Category/Edit/@category.ID">@category.Name</a></td>
+                                        <td>@category.ParentID</td>
+                                        <td>@category.Description</td>
                                         <td>
-                                            <a href="/AdminObajuStore/ApplicationUser/Edit/@user.Id" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                            <a href="/AdminObajuStore/ApplicationUserRole/Add/@user.Id" class="btn btn-sm btn-info"><i class="fa fa-user-md"></i></a>
-                                            <button type="button" class="btn btn-sm btn-danger btnDelete" data-id="@user.Id"><i class="fa fa-trash-o"></i></button>
+                                            <a href="/AdminObajuStore/Category/Edit/@category.ID" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                            <button type="button" class="btn btn-sm btn-danger btnDelete" data-id="@category.ID"><i class="fa fa-trash-o"></i></button>
 
                                         </td>
                                     </tr>
@@ -125,5 +122,5 @@
 </section><!-- /.content -->
 
 @section scripts{
-    <script src="~/Assets/Admin/js/deleteUser.js"></script>
+    <script src="~/Assets/Admin/js/deleteCategory.js"></script>
 }

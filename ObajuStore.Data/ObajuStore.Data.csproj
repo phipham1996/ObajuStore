@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201612211646468_addBioToAppUser.Designer.cs">
       <DependentUpon>201612211646468_addBioToAppUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612280437256_AddIsDeleteColToTables.cs" />
+    <Compile Include="Migrations\201612280437256_AddIsDeleteColToTables.Designer.cs">
+      <DependentUpon>201612280437256_AddIsDeleteColToTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ObajuStoreDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612211646468_addBioToAppUser.resx">
       <DependentUpon>201612211646468_addBioToAppUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612280437256_AddIsDeleteColToTables.resx">
+      <DependentUpon>201612280437256_AddIsDeleteColToTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,7 +3,8 @@
     public class CommonConstants
     {
         public const string ProductTag = "product";
-        public const string ADMIN_SESSION = "ADMIN_SESSION";
+        public const string ADMIN_IMG = "ADMIN_IMG";
+        public const string ADMIN_CREATEDDATE = "ADMIN_CREATEDDATE";
         public const string PostTag = "post";
         public const string DefaultFooter = "default";
         public const string ShoppingCartSession = "ShoppingCartSession";

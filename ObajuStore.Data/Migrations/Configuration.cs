@@ -25,6 +25,7 @@
             CreateContactDetail(context);
             CreateSystemConfig(context);
             CreatePage(context);
+            CreateCategory(context);
         }
 
         #region Methods
@@ -159,6 +160,39 @@
                         Status = true
                     };
                     context.Pages.Add(page);
+                    context.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var eve in ex.EntityValidationErrors)
+                    {
+                        Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation error.");
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Trace.WriteLine($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CreateCategory(ObajuStoreDbContext context)
+        {
+            if (context.ProductCategories.Count() == 0)
+            {
+                try
+                {
+                    var category = new ProductCategory()
+                    {
+                        Name = "Nam",
+                        Alias = "nam",
+                        DisplayOrder = 1,
+                        CreatedBy = "system",
+                        CreatedDate = DateTime.Now,
+                        Description = @"Danh mục Nam- được tạo mặc định bởi hệ thống",
+                        Status = true
+                    };
+                    context.ProductCategories.Add(category);
                     context.SaveChanges();
                 }
                 catch (DbEntityValidationException ex)

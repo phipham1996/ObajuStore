@@ -3,6 +3,7 @@ using ObajuStore.Data.Repositories;
 using ObajuStore.Model.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ObajuStore.Service
 {
@@ -15,6 +16,8 @@ namespace ObajuStore.Service
         ProductCategory Delete(long id);
 
         IEnumerable<ProductCategory> GetAll();
+
+        IEnumerable<ProductCategory> GetAllPaging(string q, int page, int pageSize, out int totalRow);
 
         IEnumerable<ProductCategory> GetAll(string keyword);
 
@@ -80,6 +83,16 @@ namespace ObajuStore.Service
                 return _productCategoryRepository.GetMulti(x => x.Name.Contains(keyword) || x.Description.Contains(keyword));
             else
                 return _productCategoryRepository.GetAll();
+        }
+
+        public IEnumerable<ProductCategory> GetAllPaging(string q, int page, int pageSize, out int totalRow)
+        {
+            var query = _productCategoryRepository.GetAll();
+            if (!string.IsNullOrEmpty(q))
+                query = query.Where(x => x.Name.ToLower().Contains(q.ToLower()) || x.Description.ToLower().Contains(q.ToLower()));
+            totalRow = query.Count();
+
+            return query.OrderByDescending(x => x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize);
         }
     }
 }

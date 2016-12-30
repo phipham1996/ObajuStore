@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ObajuStore.Common.Helpers;
 using System.Web.Mvc;
 
 namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
 {
     public class AccountController : BaseController
     {
-        // GET: AdminObajuStore/Account
-        public ActionResult Index()
+        public ActionResult Home()
         {
-            return View();
+            var homePage = ConfigHelper.GetByKey("HomePage");
+            return Redirect(homePage);
+        }
+
+        public ActionResult MyProfile()
+        {
+            var profile = ConfigHelper.GetByKey("Profile");
+            return Redirect(profile);
         }
     }
 }
