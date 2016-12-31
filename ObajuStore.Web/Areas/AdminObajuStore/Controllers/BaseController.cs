@@ -2,7 +2,7 @@
 
 namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
 {
-    [Authorize(Roles = "ADMIN, MOD, MAN")]
+    [Authorize(Roles = "ADMIN, MAN")]
     public class BaseController : Controller
     {
         protected void SetAlert(string message, string type)

@@ -56,9 +56,9 @@
                                         <td><a href="/AdminObajuStore/ApplicationUser/Edit/@user.Id">@user.UserName</a></td>
                                         <td>@user.Email</td>
                                         <td>
-                                            <a href="/AdminObajuStore/ApplicationUser/Edit/@user.Id" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                            <a href="/AdminObajuStore/ApplicationUserRole/Add/@user.Id" class="btn btn-sm btn-info"><i class="fa fa-user-md"></i></a>
-                                            <button type="button" class="btn btn-sm btn-danger btnDelete" data-id="@user.Id"><i class="fa fa-trash-o"></i></button>
+                                            <a href="/AdminObajuStore/ApplicationUser/Edit/@user.Id" class="btn btn-sm btn-primary"  title="Cập nhật @user.FullName"><i class="fa fa-edit"></i></a>
+                                            <a href="/AdminObajuStore/ApplicationUserRole/Index/@user.Id" class="btn btn-sm btn-info" title="Cấp quyền cho @user.FullName"><i class="fa fa-user-md"></i></a>
+                                            <button type="button" class="btn btn-sm btn-danger btnDelete" data-id="@user.Id"  title="Xóa @user.FullName"><i class="fa fa-trash-o"></i></button>
 
                                         </td>
                                     </tr>

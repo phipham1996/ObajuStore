@@ -171,7 +171,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
             ModelState.AddModelError("", "Cập nhật không thành công. Vui lòng thử lại!");
             return View(model);
         }
-
+        [Authorize(Roles = CommonConstants.ADMIN)]
         public async Task<JsonResult> Delete(string id)
         {
             if (ModelState.IsValid)

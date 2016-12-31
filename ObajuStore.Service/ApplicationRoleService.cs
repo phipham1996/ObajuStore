@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ObajuStore.Common.Exceptions;
+﻿using ObajuStore.Common.Exceptions;
 using ObajuStore.Data.Infrastructure;
 using ObajuStore.Data.Repositories;
 using ObajuStore.Model.Models;
+using System.Collections.Generic;
 
 namespace ObajuStore.Service
 {
@@ -42,6 +40,7 @@ namespace ObajuStore.Service
                 throw new NameDuplicatedException("Tên không được trùng");
             return _appRole.Add(appRole);
         }
+
         public void Delete(string id)
         {
             var role = _appRole.GetSingleById(id);
@@ -72,7 +71,5 @@ namespace ObajuStore.Service
                 throw new NameDuplicatedException("Tên không được trùng");
             _appRole.Update(AppRole);
         }
-
-
     }
 }

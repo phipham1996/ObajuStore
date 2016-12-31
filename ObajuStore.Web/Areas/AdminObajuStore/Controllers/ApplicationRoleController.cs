@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ObajuStore.Common;
 using ObajuStore.Model.Models;
 using ObajuStore.Service;
 using ObajuStore.Web.Infrastructure.Extensions;
@@ -29,14 +30,14 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = CommonConstants.ADMIN)]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = CommonConstants.ADMIN)]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ApplicationRoleViewModel model)
         {
@@ -54,7 +55,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = CommonConstants.ADMIN)]
         public ActionResult Edit(string id)
         {
             if (ModelState.IsValid)
@@ -67,7 +68,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = CommonConstants.ADMIN)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ApplicationRoleViewModel model)
         {
@@ -85,6 +86,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = CommonConstants.ADMIN)]
         public JsonResult Delete(string id)
         {
             if (ModelState.IsValid)

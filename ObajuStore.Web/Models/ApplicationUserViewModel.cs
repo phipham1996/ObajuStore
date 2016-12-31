@@ -46,5 +46,6 @@ namespace ObajuStore.Web.Models
         [Display(Name = "Số điện thoại")]
         public string PhoneNumber { set; get; }
 
+        public List<string> Roles { get; set; }
     }
 }

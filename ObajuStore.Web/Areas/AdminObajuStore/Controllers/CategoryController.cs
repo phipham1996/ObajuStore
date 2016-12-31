@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ObajuStore.Common;
 using ObajuStore.Common.Helpers;
 using ObajuStore.Model.Models;
 using ObajuStore.Service;
@@ -8,8 +9,6 @@ using ObajuStore.Web.Infrastructure.Helpers;
 using ObajuStore.Web.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
@@ -17,11 +16,14 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
     public class CategoryController : BaseController
     {
         private IProductCategoryService _categoryService;
+
         public CategoryController(IProductCategoryService categoryService)
         {
             _categoryService = categoryService;
         }
+
         // GET: AdminObajuStore/Category
+
         public ActionResult Index(string q = null, int page = 1)
         {
             ViewBag.Filter = q;
@@ -42,6 +44,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
         }
 
         // GET: AdminObajuStore/Category/Details/5
+        [Authorize(Roles = CommonConstants.ADMIN)]
         public ActionResult Details(int id)
         {
             var category = _categoryService.GetByID(id);
@@ -59,7 +62,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
 
         // POST: AdminObajuStore/Category/Create
         [HttpPost]
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = CommonConstants.ADMIN)]
         public ActionResult Create(ProductCategoryViewModel model)
         {
             try
@@ -77,7 +80,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
             }
         }
 
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = CommonConstants.ADMIN)]
         // GET: AdminObajuStore/Category/Edit/5
         public ActionResult Edit(int id)
         {
@@ -89,7 +92,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
 
         // POST: AdminObajuStore/Category/Edit/5
         [HttpPost]
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = CommonConstants.ADMIN)]
         public ActionResult Edit(int id, ProductCategoryViewModel model)
         {
             try
@@ -108,7 +111,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
             }
         }
 
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = CommonConstants.ADMIN)]
         // GET: AdminObajuStore/Category/Delete/5
         public JsonResult Delete(int id)
         {
@@ -132,6 +135,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
         }
 
         #region Helpers
+
         [NonAction]
         protected virtual void PrepareProductCategoriesModel(ProductCategoryViewModel model)
         {
@@ -153,6 +157,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
         {
             ViewBag.ParentID = new SelectList(_categoryService.GetAll(), "ParentID", "Name", selectedID);
         }
-        #endregion
+
+        #endregion Helpers
     }
 }

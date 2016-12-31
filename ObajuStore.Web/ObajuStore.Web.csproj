@@ -191,6 +191,7 @@
     <Compile Include="Areas\AdminObajuStore\Controllers\AccountController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\ApplicationRoleController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\ApplicationUserController.cs" />
+    <Compile Include="Areas\AdminObajuStore\Controllers\ApplicationUserRoleController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\BaseController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\CategoryController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\HomeController.cs" />
@@ -2277,6 +2278,7 @@
     <Content Include="Areas\AdminObajuStore\Views\Category\Index.cshtml" />
     <Content Include="Areas\AdminObajuStore\Views\Category\Create.cshtml" />
     <Content Include="Areas\AdminObajuStore\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\ApplicationUserRole\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
