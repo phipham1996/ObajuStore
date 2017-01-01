@@ -11,8 +11,7 @@ using ObajuStore.Web.App_Start;
 
 namespace ObajuStore.Web.Controllers
 {
-    [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

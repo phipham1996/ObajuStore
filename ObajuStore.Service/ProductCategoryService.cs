@@ -17,6 +17,8 @@ namespace ObajuStore.Service
 
         IEnumerable<ProductCategory> GetAll();
 
+        IEnumerable<ProductCategory> GetParentProductCategory();
+
         IEnumerable<ProductCategory> GetAllPaging(string q, int page, int pageSize, out int totalRow);
 
         IEnumerable<ProductCategory> GetAll(string keyword);
@@ -93,6 +95,12 @@ namespace ObajuStore.Service
             totalRow = query.Count();
 
             return query.OrderByDescending(x => x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
+        public IEnumerable<ProductCategory> GetParentProductCategory()
+        {
+            var category = _productCategoryRepository.GetMulti(x => x.ParentID == null || x.ParentID < 1);
+            return category;
         }
     }
 }

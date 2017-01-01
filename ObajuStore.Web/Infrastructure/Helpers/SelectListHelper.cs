@@ -1,10 +1,8 @@
 ﻿using ObajuStore.Model.Models;
 using ObajuStore.Service;
 using ObajuStore.Web.Infrastructure.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ObajuStore.Web.Infrastructure.Helpers

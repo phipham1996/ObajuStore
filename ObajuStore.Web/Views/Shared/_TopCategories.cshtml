@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ObajuStore.Web.Models.ProductCategoryViewModel>
+@using ObajuStore.Web.Infrastructure.Extensions
+@{
+    MenuHelper menuHelper = new MenuHelper();
+}
+
+@foreach (var parent in Model)
+{
+    <h5>@parent.Name</h5>
+
+    <ul>
+        @{ 
+            var childs = menuHelper.GetShowInFooter(parent.ID);
+        }
+        @foreach (var child in childs)
+        {
+            <li>
+                <a href="/@(child.Alias)-@(child.ID).htm">@child.Name</a>
+            </li>
+        }
+    </ul>
+}
+
