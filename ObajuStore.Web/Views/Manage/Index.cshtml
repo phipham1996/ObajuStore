@@ -1,34 +1,51 @@
 ﻿@model ObajuStore.Web.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Tài khoản của tôi";
+    var user = (ObajuStore.Web.Models.ApplicationUserViewModel)ViewBag.User;
 }
 
 <div class="col-md-12 form-login">
-
-    <p class="text-success">@ViewBag.StatusMessage</p>
-    <div>
-        <h4>Thiết lập tài khoản</h4>
+    <div class="table-responsive">
+        <h4>Thông tin tài khoản - @user.FullName</h4>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>Mật khẩu:</dt>
-            <dd>
-                [
-                @if (Model.HasPassword)
-            {
-                    @Html.ActionLink("Đổi mật khẩu", "ChangePassword")
-                }
-                else
-                {
-                    @Html.ActionLink("Thêm", "SetPassword")
-                }
-                ]
-            </dd>
-            <dt>Tài khoản mạng xã hội:</dt>
-            <dd>
-                @Model.Logins.Count [
-                @Html.ActionLink("Manage", "ManageLogins") ]
-            </dd>
-        </dl>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>Họ tên</td>
+                    <td>@user.FullName</td>
+                </tr>
+                <tr>
+                    <td>Tên đăng nhập</td>
+                    <td>@user.UserName</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@user.BirthDay.ToShortDateString()</td>
+                </tr>
+                <tr>
+                    <td>Giới tính</td>
+                    <td>@user.Gender</td>
+                </tr>
+                <tr>
+                    <td>Ngày tham gia</td>
+                    <td>@user.CreatedDate.Value.ToShortDateString()</td>
+                </tr>
+                <tr>
+                    <td>Mật khẩu</td>
+                    <td>
+                        [
+                        @if (Model.HasPassword)
+                        {
+                            @Html.ActionLink("Đổi mật khẩu", "ChangePassword")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Thêm", "SetPassword")
+                        }
+                        ]
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
 </div>

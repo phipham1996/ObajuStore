@@ -35,6 +35,7 @@ namespace ObajuStore.Web.Models
         public string Gender { set; get; }
 
         [Display(Name = "Ảnh đại diện")]
+        [StringLength(256, ErrorMessage = "Chỉ nhập 256 ký tự")]
         public string Image { get; set; }
 
         [Display(Name = "Đã xóa")]

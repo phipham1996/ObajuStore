@@ -5,6 +5,7 @@ using ObajuStore.Data.Repositories;
 using ObajuStore.Model.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace ObajuStore.Service
 {
@@ -30,7 +31,9 @@ namespace ObajuStore.Service
 
         IEnumerable<Product> GetRelatedProducts(long id, int top);
 
-        IEnumerable<Product> GetAllPaging(int page, int brandid, string sort, int pageSize, out int totalRow);
+        IEnumerable<Product> GetAllPagingAndSort(int page, int brandid, string sort, int pageSize, out int totalRow);
+
+        IEnumerable<Product> GetIncludeBrandPaging(string q, int page, int brandId, int pageSize, out int totalRow);
 
         Product GetByID(long id);
 
@@ -53,6 +56,8 @@ namespace ObajuStore.Service
         Tag GetTag(string tagId);
 
         IEnumerable<Product> GetHot(int top);
+
+        void SetIsDelete(long id);
 
         void SaveChanges();
     }
@@ -77,6 +82,9 @@ namespace ObajuStore.Service
         public Product Add(Product product)
         {
             product.PromotionPrice = 0;
+            product.ViewCount = 0;
+            product.CreatedDate = DateTime.Now;
+            product.IsDeleted = false;
             var _product = _productRepository.Add(product);
             _unitOfWork.Commit();
             if (!string.IsNullOrEmpty(product.Tags))
@@ -158,7 +166,7 @@ namespace ObajuStore.Service
                 return _productRepository.GetAll();
         }
 
-        public IEnumerable<Product> GetAllPaging(int page, int brandid, string sort, int pageSize, out int totalRow)
+        public IEnumerable<Product> GetAllPagingAndSort(int page, int brandid, string sort, int pageSize, out int totalRow)
         {
             var query = _productRepository.GetMulti(x => x.Status);
             switch (sort)
@@ -372,6 +380,30 @@ namespace ObajuStore.Service
                 return false;
             product.Quantity -= quantity;
             return true;
+        }
+
+        public IEnumerable<Product> GetIncludeBrandPaging(string q, int page, int brandId, int pageSize, out int totalRow)
+        {
+            var query = _productRepository.GetMulti(x => x.Status && x.IsDeleted == false, new string[] { "Brands" });
+
+            if (!string.IsNullOrEmpty(q))
+                query = query.Where(x => x.Name.ToLower().Contains(q)
+                || x.Brands.Name.ToLower().Contains(q)
+                || x.Content.ToLower().Contains(q)
+                || x.Description.ToLower().Contains(q));
+            if (brandId != 0)
+            {
+                query = _productRepository.GetMulti(x => x.BrandID == brandId);
+            }
+            totalRow = query.Count();
+            return query.Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
+        public void SetIsDelete(long id)
+        {
+            var product = _productRepository.GetSingleById(id);
+            product.IsDeleted = true;
+            SaveChanges();
         }
     }
 }

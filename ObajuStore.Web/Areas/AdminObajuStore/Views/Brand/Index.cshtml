@@ -1,0 +1,130 @@
+﻿@model ObajuStore.Web.Infrastructure.Core.PaginationSet<ObajuStore.Web.Models.BrandViewModel>
+
+@{
+    ViewBag.Title = "Danh sách thương hiệu";
+    Layout = "~/Areas/AdminObajuStore/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Title.ToUpper()
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/AdminObajuStore/Home"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            @using (Html.BeginForm("Index", "Brand", FormMethod.Get))
+                            {
+                                <div class="form-inline">
+                                    <input type="text" id="filter" value="@ViewBag.Filter" name="q" class="form-control " placeholder="Nhập từ khóa..." />
+                                    <input type="submit" class="btn btn-primary" value="Tìm kiếm" />
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> @Html.ActionLink("Thêm mới", "Create", new { controller = "Brand" }, new { @class = "non-decoration" })</button>
+                        </div>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tên thương hiệu</th>
+                                    <th>Quốc gia</th>
+                                    <th>Website</th>
+                                    <th>Trạng thái</th>
+                                    <th style="width:15%">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var Brand in Model.Items)
+                                {
+                                    <tr>
+                                        <td><a href="/AdminObajuStore/Brand/Edit/@Brand.ID">@Brand.Name</a></td>
+                                        <td>@Brand.Country</td>
+                                        <td><a target="_blank" href="@Brand.Website">@Brand.Website</a></td>
+                                        <td>@(Html.Raw(Brand.Status == true ? "<a class='text-success'>Đã duyệt</a>" : "<a class='text-danger'>Chưa duyệt</a>"))</td>
+                                        <td>
+                                            <a href="/AdminObajuStore/Brand/Edit/@Brand.ID" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                            <button type="button" data-id="@Brand.ID" class="btn btn-sm btn-danger btnDelete"><i class="fa fa-trash-o"></i></button>
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        @if (Model.TotalPages > 1)
+                        {
+                            // Create numeric links
+                            var startpage = Math.Max(1, Model.Page - Model.MaxPage / 2);
+                            var endpage = Math.Min(Model.TotalPages, Model.Page + Model.MaxPage / 2);
+
+                            <nav class="text-center">
+                                <ul class="pagination">
+                                    @if (Model.Page > 1)
+                {
+                                        <li>
+                                            <a href="?page=1" data-toggle="tooltip" title="Trang đầu" aria-label="First">
+                                                <i class="fa fa-angle-double-left"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="?page=@(Model.Page-1)" data-toggle="tooltip" title="Trang sau" aria-label="Previous">
+                                                <i class="fa fa-angle-left"></i>
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @for (int i = startpage; i <= endpage; i++)
+                {
+                    if (Model.Page == i)
+                    {
+                                            <li class="active"><a href="?page=@i" data-toggle="tooltip" title="Trang @i">@i</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="?page=@i" data-toggle="tooltip" title="Trang @i">@i</a></li>
+                                        }
+                                    }
+                                    @if (Model.Page < Model.TotalPages)
+                {
+                                        <li>
+                                            <a href="?page=@(Model.Page+1)" data-toggle="tooltip" title="Trang tiếp theo" aria-label="Next">
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="?page=@Model.TotalPages" data-toggle="tooltip" title="Trang cuối" aria-label="Last">
+                                                <i class="fa fa-angle-double-right"></i>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </nav>
+                        }
+                    </div>
+
+                </div><!-- /.box-body -->
+
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+@section scripts {
+    <script src="~/Assets/Admin/js/deleteBrand.js"></script>
+}
+

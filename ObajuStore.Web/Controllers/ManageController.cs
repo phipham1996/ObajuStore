@@ -8,6 +8,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ObajuStore.Web.Models;
 using ObajuStore.Web.App_Start;
+using ObajuStore.Service;
+using AutoMapper;
+using ObajuStore.Model.Models;
 
 namespace ObajuStore.Web.Controllers
 {
@@ -15,15 +18,18 @@ namespace ObajuStore.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IApplicationUserService _userService;
 
         public ManageController()
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager,
+            ApplicationSignInManager signInManager, IApplicationUserService userService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _userService = userService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -61,6 +67,9 @@ namespace ObajuStore.Web.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = _userService.GetUserById(userId);
+            var userModel = Mapper.Map<ApplicationUser, ApplicationUserViewModel>(user);
+            ViewBag.User = userModel;
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),

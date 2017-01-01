@@ -76,7 +76,7 @@ namespace ObajuStore.Web.Infrastructure.Extensions
         {
             product.ID = productViewModel.ID;
             product.Name = productViewModel.Name;
-            product.Alias = StringHelper.ToUnsignString(productViewModel.Alias);
+            product.Alias = StringHelper.ToUnsignString(productViewModel.Name);
 
             product.Description = productViewModel.Description;
             product.CategoryID = productViewModel.CategoryID;
@@ -130,7 +130,7 @@ namespace ObajuStore.Web.Infrastructure.Extensions
 
             brand.Description = brandViewModel.Description;
             brand.Image = brandViewModel.Image;
-            brand.Alias = StringHelper.ToUnsignString(brandViewModel.Alias);
+            brand.Alias = StringHelper.ToUnsignString(brandViewModel.Name);
             brand.Country = brandViewModel.Country;
             brand.Website = brandViewModel.Website;
             brand.HotFlag = brandViewModel.HotFlag;

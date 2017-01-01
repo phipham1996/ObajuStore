@@ -193,8 +193,10 @@
     <Compile Include="Areas\AdminObajuStore\Controllers\ApplicationUserController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\ApplicationUserRoleController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\BaseController.cs" />
+    <Compile Include="Areas\AdminObajuStore\Controllers\BrandController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\CategoryController.cs" />
     <Compile Include="Areas\AdminObajuStore\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AdminObajuStore\Controllers\ProductController.cs" />
     <Compile Include="Areas\AdminObajuStore\Models\HomeViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -243,7 +245,9 @@
     <Content Include="Assets\Admin\js\alertSetting.js" />
     <Content Include="Assets\Admin\css\custom.css" />
     <Content Include="Assets\Admin\js\deleteCategory.js" />
+    <Content Include="Assets\Admin\js\deleteProduct.js" />
     <Content Include="Assets\Admin\js\deleteRole.js" />
+    <Content Include="Assets\Admin\js\deleteBrand.js" />
     <Content Include="Assets\Admin\js\deleteUser.js" />
     <Content Include="Assets\Client\templates\contactTemplate.html" />
     <Content Include="Assets\Client\templates\newUser.html" />
@@ -2283,6 +2287,12 @@
     <Content Include="Areas\AdminObajuStore\Views\Category\Create.cshtml" />
     <Content Include="Areas\AdminObajuStore\Views\Category\Edit.cshtml" />
     <Content Include="Areas\AdminObajuStore\Views\ApplicationUserRole\Index.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\Product\Index.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\Product\Create.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\Brand\Index.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\Brand\Create.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\Brand\Edit.cshtml" />
+    <Content Include="Areas\AdminObajuStore\Views\Product\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

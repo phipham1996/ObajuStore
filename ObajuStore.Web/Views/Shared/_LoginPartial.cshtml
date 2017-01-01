@@ -9,7 +9,7 @@
 
             <ul class="menu">
                 <li>
-                    @Html.ActionLink("Xin chào " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @Html.ActionLink("Xin chào " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Xem thông tin tài khoản của bạn." })
                 </li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Thoát</a></li>
                 @if (User.IsInRole(CommonConstants.ADMIN) || User.IsInRole(CommonConstants.MAN))

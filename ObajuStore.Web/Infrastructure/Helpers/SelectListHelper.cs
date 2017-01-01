@@ -11,7 +11,7 @@ namespace ObajuStore.Web.Infrastructure.Helpers
     {
         public static List<SelectListItem> GetCategoryList(IProductCategoryService categoryService)
         {
-            var categories = GetAll(categoryService.GetAll());
+            var categories = GetAllCategories(categoryService.GetAll());
             var result = new List<SelectListItem>();
             //clone the list to ensure that "selected" property is not set
             foreach (var item in categories)
@@ -26,7 +26,7 @@ namespace ObajuStore.Web.Infrastructure.Helpers
             return result;
         }
 
-        public static IEnumerable<SelectListItem> GetAll(IEnumerable<ProductCategory> categories)
+        public static IEnumerable<SelectListItem> GetAllCategories(IEnumerable<ProductCategory> categories)
         {
             return categories.Select(c => new SelectListItem
             {
@@ -34,5 +34,6 @@ namespace ObajuStore.Web.Infrastructure.Helpers
                 Value = c.ID.ToString()
             });
         }
+
     }
 }
