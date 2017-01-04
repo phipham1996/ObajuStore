@@ -13,10 +13,13 @@ namespace ObajuStore.Web.Controllers
     public class ProductCategoryController : Controller
     {
         private IProductCategoryService _productCategory;
+        private IBrandService _brandCategory;
 
-        public ProductCategoryController(IProductCategoryService productCategory)
+        public ProductCategoryController(IProductCategoryService productCategory,
+            IBrandService brandCategory)
         {
             _productCategory = productCategory;
+            _brandCategory = brandCategory;
         }
 
         // GET: ProductCategory
@@ -26,6 +29,20 @@ namespace ObajuStore.Web.Controllers
             var parents = _productCategory.GetParentProductCategory();
             var parentsModel = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(parents);
             return PartialView("_ProductCategory", parentsModel);
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult SidebarCategories()
+        {
+            var sidebarViewModel = new SidebarViewModel();
+            var parents = _productCategory.GetParentProductCategory();
+            var parentsModel = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(parents);
+
+            var brands = _brandCategory.GetActivedBrand("");
+            var brandsModel = Mapper.Map<IEnumerable<Brand>, IEnumerable<BrandViewModel>>(brands);
+            sidebarViewModel.ProductCategories = parentsModel;
+            sidebarViewModel.Brands = brandsModel;
+            return PartialView("_SidebarCategories", sidebarViewModel);
         }
 
     }

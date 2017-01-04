@@ -4,6 +4,7 @@ using ObajuStore.Data.Infrastructure;
 using ObajuStore.Data.Repositories;
 using ObajuStore.Model.Models;
 using System.Linq;
+using ObajuStore.Common;
 
 namespace ObajuStore.Service
 {
@@ -56,11 +57,11 @@ namespace ObajuStore.Service
         {
             if (!string.IsNullOrEmpty(keyword))
             {
-                return _brandRepository.GetMulti(x => x.Status && x.Name.Contains(keyword) || x.Description.Contains(keyword));
+                return _brandRepository.GetMulti(x => x.Name.Contains(keyword) || x.Description.Contains(keyword) && x.IsDeleted == false && x.Name != CommonConstants.INSPIRED_BRAND);
             }
             else
             {
-                return _brandRepository.GetMulti(x => x.Status);
+                return _brandRepository.GetMulti(x => x.Status && x.IsDeleted == false && x.Name != CommonConstants.INSPIRED_BRAND);
             }
         }
 

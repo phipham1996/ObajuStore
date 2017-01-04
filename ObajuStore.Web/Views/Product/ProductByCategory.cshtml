@@ -1,0 +1,74 @@
+﻿@model ObajuStore.Web.Infrastructure.Core.PaginationSet<ObajuStore.Web.Models.ProductViewModel>
+
+@{
+    var category = (ObajuStore.Web.Models.ProductCategoryViewModel)ViewBag.Category;
+    ViewBag.Title = "Các sản phẩm trong danh mục" + category.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">Trang chủ</a>
+        </li>
+        <li>
+            <a href="/danh-muc/@(category.Alias)-@(category.ID).htm">@category.Name</a>
+        </li>
+        <li>Có @Model.Items.Count() sản phẩm</li>
+    </ul>
+
+</div>
+
+@{Html.RenderAction("SidebarCategories", "ProductCategory");}
+
+<div class="col-md-9">
+
+    <div class="row same-height-row">
+        @if(Model.Count <= 0)
+        {
+            <h4 class="text-warning text-center"> Dữ liệu đang cập nhập <i class="fa fa-spinner fa-spin"></i></h4>
+        }
+        @foreach (var item in Model.Items)
+        {
+            var url = "/san-pham/" + item.Alias + "-" + item.ID + ".htm";
+            <div class="col-md-3 col-sm-6">
+                <div class="product same-height">
+                    <div class="flip-container">
+                        <div class="flipper">
+                            <div class="front">
+                                <a href="@url">
+                                    <img src="@item.Image" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="back">
+                                <a href="@url">
+                                    <img src="@item.Image" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="@url" class="invisible">
+                        <img src="@item.Image" alt="" class="img-responsive">
+                    </a>
+                    <div class="text">
+                        <h3><a href="@url">@item.Name</a></h3>
+                        <p class="price">
+                           @if (item.PromotionPrice.HasValue && item.PromotionPrice.Value != 0)
+                           {
+                            <del>@item.Price.ToString("c0")</del>
+                            @item.PromotionPrice.Value.ToString("c0")
+                           }
+                           else
+                           {
+                            @item.Price.ToString("c0")
+                           }
+                        </p>
+                    </div>
+                </div>
+                <!-- /.product -->
+            </div>
+        }
+    </div>
+
+</div>
+<!-- /.col-md-9 -->

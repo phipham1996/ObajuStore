@@ -57,6 +57,8 @@ namespace ObajuStore.Service
 
         IEnumerable<Product> GetHot(int top);
 
+        IEnumerable<Product> GetInspired();
+
         void SetIsDelete(long id);
 
         void SaveChanges();
@@ -168,7 +170,9 @@ namespace ObajuStore.Service
 
         public IEnumerable<Product> GetAllPagingAndSort(int page, int brandid, string sort, int pageSize, out int totalRow)
         {
-            var query = _productRepository.GetMulti(x => x.Status);
+            var query = _productRepository.GetMulti(x => x.Status && x.IsDeleted == false
+                        && x.BrandID != CommonConstants.INSPIRED_BRAND_ID
+                        && x.CategoryID != CommonConstants.INSPIRED);
             switch (sort)
             {
                 case "popular":
@@ -206,7 +210,9 @@ namespace ObajuStore.Service
 
         public IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
         {
-            return _productRepository.GetMultiPaging(x => x.Status, out totalRow, page, pageSize);
+            return _productRepository.GetMultiPaging(x => x.Status && x.IsDeleted == false
+                        && x.BrandID != CommonConstants.INSPIRED_BRAND_ID
+                        && x.CategoryID != CommonConstants.INSPIRED, out totalRow, page, pageSize);
         }
 
         public void SaveChanges()
@@ -216,17 +222,19 @@ namespace ObajuStore.Service
 
         public IEnumerable<Product> GetLastest(int top)
         {
-            return _productRepository.GetMulti(x => x.Status).OrderByDescending(x => x.CreatedDate).Take(top);
+            return _productRepository.GetMulti(x => x.Status && x.IsDeleted == false
+                        && x.BrandID != CommonConstants.INSPIRED_BRAND_ID
+                        && x.CategoryID != CommonConstants.INSPIRED).OrderByDescending(x => x.CreatedDate).Take(top);
         }
 
         public IEnumerable<Product> GetTopSales(int top)
         {
-            return _productRepository.GetMulti(x => x.Status && x.HotFlag == true).OrderByDescending(x => x.CreatedDate).Take(top);
+            return _productRepository.GetMulti(x => x.Status && x.HotFlag == true && x.IsDeleted == false).OrderByDescending(x => x.CreatedDate).Take(top);
         }
 
         public IEnumerable<Product> GetByCategoryIDPaging(int categoryId, int brandid, int page, int pageSize, string sort, out int totalRow)
         {
-            var query = _productRepository.GetMulti(x => x.Status && x.CategoryID == categoryId);
+            var query = _productRepository.GetMulti(x => x.Status && x.CategoryID == categoryId && x.IsDeleted == false && x.Brands.Name != CommonConstants.INSPIRED_BRAND, new string[] { "ProductCategory", "Brands" });
             switch (sort)
             {
                 case "popular":
@@ -263,12 +271,14 @@ namespace ObajuStore.Service
 
         public IEnumerable<string> GetProductsByName(string name)
         {
-            return _productRepository.GetMulti(x => x.Status && x.Name.Contains(name)).Select(n => n.Name);
+            return _productRepository.GetMulti(x => x.Status && x.Name.Contains(name) && x.IsDeleted == false).Select(n => n.Name);
         }
 
         public IEnumerable<Product> GetByKeywordPaging(string keyword, int brandid, int page, int pageSize, string sort, out int totalRow)
         {
-            var query = _productRepository.GetMulti(x => x.Status && x.Name.Contains(keyword));
+            var query = _productRepository.GetMulti(x => x.Status && x.Name.Contains(keyword) && x.IsDeleted == false
+                        && x.BrandID != CommonConstants.INSPIRED_BRAND_ID
+                        && x.CategoryID != CommonConstants.INSPIRED);
             switch (sort)
             {
                 case "popular":
@@ -306,7 +316,11 @@ namespace ObajuStore.Service
         public IEnumerable<Product> GetRelatedProducts(long id, int top)
         {
             var product = _productRepository.GetSingleById(id);
-            return _productRepository.GetMulti(x => x.Status && x.ID != id && x.CategoryID == product.CategoryID).OrderByDescending(x => x.CreatedDate).Take(top);
+            return _productRepository.GetMulti(x => x.Status && x.ID != id
+            && x.CategoryID == product.CategoryID && x.IsDeleted == false
+            && x.CategoryID != CommonConstants.INSPIRED
+            && x.BrandID != CommonConstants.INSPIRED_BRAND_ID)
+            .OrderByDescending(x => x.CreatedDate).Take(top);
         }
 
         public IEnumerable<Tag> GetTagsByProduct(long id)
@@ -320,27 +334,27 @@ namespace ObajuStore.Service
             switch (sort)
             {
                 case "popular":
-                    model = model.OrderByDescending(x => x.ViewCount);
+                    model = model.OrderByDescending(x => x.ViewCount).Where(x => x.IsDeleted == false);
                     break;
 
                 case "discount":
-                    model = model.Where(x => x.PromotionPrice.HasValue).OrderByDescending(y => y.PromotionPrice);
+                    model = model.Where(x => x.PromotionPrice.HasValue && x.IsDeleted == false).OrderByDescending(y => y.PromotionPrice);
                     break;
 
                 case "price":
-                    model = model.OrderBy(x => x.Price);
+                    model = model.OrderBy(x => x.Price).Where(x => x.IsDeleted == false);
                     break;
 
                 case "price_asc":
-                    model = model.OrderBy(x => x.Price);
+                    model = model.OrderBy(x => x.Price).Where(x => x.IsDeleted == false);
                     break;
 
                 case "price_des":
-                    model = model.OrderByDescending(x => x.Price);
+                    model = model.OrderByDescending(x => x.Price).Where(x => x.IsDeleted == false);
                     break;
 
                 default:
-                    model = model.OrderByDescending(x => x.CreatedDate);
+                    model = model.OrderByDescending(x => x.CreatedDate).Where(x => x.IsDeleted == false);
                     break;
             }
 
@@ -365,12 +379,18 @@ namespace ObajuStore.Service
 
         public IEnumerable<Product> GetTopView(int top)
         {
-            return _productRepository.GetMulti(x => x.Status).OrderByDescending(x => x.ViewCount).Take(top);
+            return _productRepository.GetMulti(x => x.Status && x.IsDeleted == false
+                        && x.BrandID != CommonConstants.INSPIRED_BRAND_ID
+                        && x.CategoryID != CommonConstants.INSPIRED)
+                        .OrderByDescending(x => x.ViewCount).Take(top);
         }
 
         public IEnumerable<Product> GetHot(int top)
         {
-            return _productRepository.GetMulti(x => x.Status && x.HotFlag == true).OrderByDescending(x => x.CreatedDate).Take(top);
+            return _productRepository.GetMulti(x => x.Status && x.HotFlag == true
+                        && x.IsDeleted == false && x.BrandID != CommonConstants.INSPIRED_BRAND_ID
+                        && x.CategoryID != CommonConstants.INSPIRED)
+                        .OrderByDescending(x => x.CreatedDate).Take(top);
         }
 
         public bool SellingProduct(long productId, int quantity)
@@ -405,5 +425,13 @@ namespace ObajuStore.Service
             product.IsDeleted = true;
             SaveChanges();
         }
+
+        public IEnumerable<Product> GetInspired()
+        {
+            var inspired = _productRepository.GetMulti(x => x.CategoryID == CommonConstants.INSPIRED);
+            return inspired;
+        }
+
     }
 }
+

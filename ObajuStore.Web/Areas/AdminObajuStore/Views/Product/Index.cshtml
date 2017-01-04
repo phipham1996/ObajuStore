@@ -56,6 +56,7 @@
                                         <td>@(Html.Raw(product.Status == true ? "<a class='text-success'>Đã duyệt</a>" : "<a class='text-danger'>Chưa duyệt</a>"))</td>
                                         <td>
                                             <a href="/AdminObajuStore/Product/Edit/@product.ID" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                            <a href="/san-pham/@(product.Alias)-@(product.ID).htm" target="_blank" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
                                             <button type="button" data-id="@product.ID" class="btn btn-sm btn-danger btnDelete"><i class="fa fa-trash-o"></i></button>
 
                                         </td>

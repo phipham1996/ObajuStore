@@ -11,7 +11,7 @@ namespace ObajuStore.Web.Infrastructure.Helpers
     {
         public static List<SelectListItem> GetCategoryList(IProductCategoryService categoryService)
         {
-            var categories = GetAllCategories(categoryService.GetAll());
+            var categories = GetAllCategories(categoryService.GetByDisplayOrder());
             var result = new List<SelectListItem>();
             //clone the list to ensure that "selected" property is not set
             foreach (var item in categories)

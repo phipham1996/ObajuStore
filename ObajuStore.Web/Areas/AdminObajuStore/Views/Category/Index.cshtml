@@ -43,6 +43,7 @@
                                     <th>Tên danh mục</th>
                                     <th>Danh mục cha</th>
                                     <th>Mô tả</th>
+                                    <th>Thứ tự trong danh mục</th>
                                     <th style="width:15%">Thao tác</th>
                                 </tr>
                             </thead>
@@ -53,6 +54,7 @@
                                         <td><a href="/AdminObajuStore/Category/Edit/@category.ID">@category.Name</a></td>
                                         <td>@category.ParentID</td>
                                         <td>@category.Description</td>
+                                        <td>@category.DisplayOrder</td>
                                         <td>
                                             <a href="/AdminObajuStore/Category/Edit/@category.ID" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                             <button type="button" class="btn btn-sm btn-danger btnDelete" data-id="@category.ID"><i class="fa fa-trash-o"></i></button>

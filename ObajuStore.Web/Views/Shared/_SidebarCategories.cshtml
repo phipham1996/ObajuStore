@@ -1,0 +1,72 @@
+﻿@model ObajuStore.Web.Models.SidebarViewModel
+
+@using ObajuStore.Web.Infrastructure.Extensions
+@{
+    MenuHelper menuHelper = new MenuHelper();
+}
+
+<div class="col-md-3">
+    <!-- *** MENUS AND FILTERS ***
+    _________________________________________________________ -->
+    <div class="panel panel-default sidebar-menu">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Danh mục</h3>
+        </div>
+
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked category-menu">
+                @foreach (var cateParent in Model.ProductCategories)
+                {
+                    <li class="active">
+                        <a href="category.html">@cateParent.Name</a>
+                        <ul>
+                            @{
+                                var cates = menuHelper.GetChildByID(cateParent.ID);
+
+                                foreach (var cate in cates)
+                                {
+                                    var catego = menuHelper.GetChildByID(cate.ID);
+                                    foreach (var cat in catego)
+                                    {
+                                        <li><a href="/danh-muc/@(cat.Alias)-@(cat.ID).htm"> @cat.Name </a></li>
+                                    }
+                                }
+                            }
+
+                        </ul>
+                    </li>
+                                }
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default sidebar-menu">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Thương hiệu <a class="btn btn-xs btn-danger pull-right" href="/thuong-hieu.htm"><i class="fa fa-stack-overflow"></i></a></h3>
+        </div>
+
+        <div class="panel-body">
+            @using (Html.BeginForm("ProductByCategory", "Product", FormMethod.Get))
+            {
+                <div class="form-group">
+                    @foreach (var brand in Model.Brands)
+                    {
+                        <div class="checkbox">
+                            <label class="form-inline">
+                                <input name="brandId" value="@brand.ID" type="radio"> @brand.Name
+                            </label>
+                        </div>
+                    }
+                </div>
+
+                <button type="submit" class="btn btn-default btn-sm btn-primary">
+                    <i class="fa fa-pencil"></i> Duyệt
+                </button>
+
+            }
+        </div>
+    </div>
+</div>

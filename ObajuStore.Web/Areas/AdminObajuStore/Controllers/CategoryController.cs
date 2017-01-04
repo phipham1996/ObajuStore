@@ -29,7 +29,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
             ViewBag.Filter = q;
             int pageSize = PaginationHelper.PageSize();
             int totalRow = 0;
-            var categories = _categoryService.GetAllPaging(q, page, pageSize, out totalRow);
+            var categories = _categoryService.GetAllPaging(q, page, pageSize, out totalRow, true);
             var model = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(categories);
 
             var pagination = new PaginationSet<ProductCategoryViewModel>()

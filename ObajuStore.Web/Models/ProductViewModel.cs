@@ -4,6 +4,7 @@ using ObajuStore.Model.Abstracts;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ObajuStore.Web.Models
 {
@@ -24,6 +25,7 @@ namespace ObajuStore.Web.Models
         public int CategoryID { get; set; }
 
         [Display(Name = "Thương hiệu")]
+        [Required(ErrorMessage = "Vui lòng chọn thương hiệu")]
         public int BrandID { get; set; }
 
         [Display(Name = "Hình ảnh")]
@@ -31,6 +33,7 @@ namespace ObajuStore.Web.Models
         public string Image { get; set; }
 
         [Display(Name = "Bộ hình ảnh")]
+        [Column(TypeName = "xml")]
         public string MoreImages { get; set; }
 
         [Display(Name = "Giá bán")]

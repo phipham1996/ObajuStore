@@ -60,18 +60,49 @@
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, @id = "txtImage" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control col-md-5", @id = "txtImage" }, @id = "txtImage" })
                                     @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-                                    <button class="btn btn-primary" id="btnImage">Tải ảnh</button>
+                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary clear" id="btnImage">Tải ảnh</button>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.MoreImages, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.MoreImages, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.MoreImages, "", new { @class = "text-danger" })
+                                    <input type="hidden" id="txtMoreImages" name="images" class="form-control" />
+                                    <input type="button" value="Xem ảnh" id="uploadImage" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            <div id="imageModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Quản lý ảnh cho sản phẩm</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="text-info">Bạn có thể thêm một hoặc nhiều ảnh</p>
+                                            <p class="text-danger">Nhấp 2 lần vào ảnh để xóa.</p>
+                                            <hr class="small" />
+                                            <div class="form-inline imageList"></div>
+                                            <br />
+                                            <input type="button" class="btn btn-success" value="Chọn ảnh" id="btnPickImages" />
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" id="btnSubmit">Hoàn tất</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -212,6 +243,7 @@
 
 
 @section scripts{
+    <script src="~/Assets/Admin/js/controllers/productController.js"></script>
     <script>
         $('#btnImage').on('click', function (e) {
             e.preventDefault();

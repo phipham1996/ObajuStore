@@ -1,4 +1,5 @@
-﻿using ObajuStore.Data.Infrastructure;
+﻿using ObajuStore.Common;
+using ObajuStore.Data.Infrastructure;
 using ObajuStore.Model.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,9 @@ namespace ObajuStore.Data.Repositories
             var query = from p in DbContext.Products
                         join pt in DbContext.ProductTags
                         on p.ID equals pt.ProductID
-                        where pt.TagID == tagId
+                        where pt.TagID == tagId && p.IsDeleted == false
+                        && p.BrandID != CommonConstants.INSPIRED_BRAND_ID
+                        && p.CategoryID != CommonConstants.INSPIRED
                         select p;
             if (brandId != 0)
             {
@@ -32,6 +35,9 @@ namespace ObajuStore.Data.Repositories
                         join pt in DbContext.ProductTags
                         on p.ID equals pt.ProductID
                         where pt.TagID == tagId && p.BrandID == brandId
+                        && p.IsDeleted == false
+                        && p.BrandID == CommonConstants.INSPIRED_BRAND_ID
+                        && p.CategoryID == CommonConstants.INSPIRED
                         select p;
             }
 

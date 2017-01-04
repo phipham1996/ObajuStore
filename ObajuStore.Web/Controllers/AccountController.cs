@@ -91,8 +91,6 @@ namespace ObajuStore.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    Session[CommonConstants.ADMIN_IMG] = user.Image;
-                    Session[CommonConstants.ADMIN_CREATEDDATE] = user.CreatedDate.ToString();
                     return RedirectToLocal(returnUrl);
 
                 case SignInStatus.LockedOut:
@@ -452,8 +450,6 @@ namespace ObajuStore.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            Session[CommonConstants.ADMIN_IMG] = null;
-            Session[CommonConstants.ADMIN_CREATEDDATE] = null;
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

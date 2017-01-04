@@ -31,6 +31,20 @@ namespace ObajuStore.Web
            );
 
             routes.MapRoute(
+               name: "Product",
+               url: "danh-muc/{alias}-{id}.htm",
+               defaults: new { controller = "Product", action = "ProductByCategory", id = UrlParameter.Optional },
+               namespaces: new string[] { "ObajuStore.Web.Controllers" }
+           );
+
+            routes.MapRoute(
+              name: "Product Details",
+              url: "san-pham/{alias}-{id}.htm",
+              defaults: new { controller = "Product", action = "Details", id = UrlParameter.Optional },
+              namespaces: new string[] { "ObajuStore.Web.Controllers" }
+          );
+
+            routes.MapRoute(
                 name: "Login",
                 url: "login.htm",
                 defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional },

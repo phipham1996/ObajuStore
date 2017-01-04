@@ -8,9 +8,9 @@ using ObajuStore.Web.Infrastructure.Helpers;
 using ObajuStore.Web.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Xml.Linq;
 
 namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
 {
@@ -27,6 +27,7 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
             _categoryService = categoryService;
             _brandService = brandService;
         }
+
         // GET: AdminObajuStore/Product
         public ActionResult Index(string q = null, int page = 1, int brandId = 0)
         {
@@ -58,12 +59,22 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProductViewModel model)
+        public ActionResult Create(ProductViewModel model, string images)
         {
             if (ModelState.IsValid)
             {
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                var imageList = serializer.Deserialize<List<string>>(images);
+
+                XElement xElement = new XElement("Images");
+                foreach (var item in imageList)
+                {
+                    xElement.Add(new XElement("Image", item));
+                }
                 var product = new Product();
                 product.UpdateProduct(model);
+
+                product.MoreImages = xElement.ToString();
                 product.CreatedBy = User.Identity.Name;
                 _productService.Add(product);
                 _productService.SaveChanges();
@@ -86,12 +97,27 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ProductViewModel model)
+        public ActionResult Edit(ProductViewModel model, string images)
         {
             if (ModelState.IsValid)
             {
+                XElement xElement = null;
+                if (!string.IsNullOrEmpty(images))
+                {
+                    JavaScriptSerializer serializer = new JavaScriptSerializer();
+                    var imageList = serializer.Deserialize<List<string>>(images);
+
+                    xElement = new XElement("Images");
+                    foreach (var item in imageList)
+                    {
+                        xElement.Add(new XElement("Image", item));
+                    }
+                }
+
                 var product = _productService.GetByID(model.ID);
                 product.UpdateProduct(model);
+                if (!string.IsNullOrEmpty(images) && images != @"[]")
+                    product.MoreImages = xElement.ToString();
                 product.UpdatedBy = User.Identity.Name;
                 product.UpdatedDate = DateTime.Now;
                 _productService.Update(product);
@@ -101,6 +127,28 @@ namespace ObajuStore.Web.Areas.AdminObajuStore.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult LoadImages(long id)
+        {
+            var product = _productService.GetByID(id);
+            var images = product.MoreImages;
+
+            List<string> listImagesReturn = new List<string>();
+            if (!string.IsNullOrEmpty(images))
+            {
+                XElement xImages = XElement.Parse(images);
+                foreach (XElement element in xImages.Elements())
+                {
+                    listImagesReturn.Add(element.Value);
+                }
+            }
+
+            return Json(new
+            {
+                data = listImagesReturn
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Delete(int id)

@@ -3,8 +3,6 @@
     public class CommonConstants
     {
         public const string ProductTag = "product";
-        public const string ADMIN_IMG = "ADMIN_IMG";
-        public const string ADMIN_CREATEDDATE = "ADMIN_CREATEDDATE";
         public const string PostTag = "post";
         public const string DefaultFooter = "default";
         public const string ShoppingCartSession = "ShoppingCartSession";
@@ -22,5 +20,9 @@
         public const string MEM = "MEM";
         public const string ADMIN = "ADMIN";
         public const string MAN = "MAN";
+
+        public const int INSPIRED = 21;
+        public const string INSPIRED_BRAND = "INSPIRED";
+        public const int INSPIRED_BRAND_ID = 11;
     }
 }

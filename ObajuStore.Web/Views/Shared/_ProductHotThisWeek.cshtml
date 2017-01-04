@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ObajuStore.Web.Models.ProductViewModel>
+
+<!-- *** HOT PRODUCT SLIDESHOW ***
+_________________________________________________________ -->
+<div id="hot">
+
+    <div class="box">
+        <div class="container">
+            <div class="col-md-12">
+                <h2>Nổi bật trong tuần</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="product-slider">
+            @if (Model.Count() <= 0)
+            {
+                <h4 class="text-warning text-center"> Dữ liệu đang cập nhập <i class="fa fa-spinner fa-spin"></i></h4>
+            }
+            @foreach (var item in Model)
+            {
+                var url = "/san-pham/" + item.Alias + "-" + item.ID + ".htm";
+                <div class="item">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front">
+                                    <a href="@url">
+                                        <img src="@item.Image" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    <a href="@url">
+                                        <img src="@item.Image" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="@url" class="invisible">
+                            <img src="@item.Image" alt="" class="img-responsive">
+                        </a>
+                        <div class="text">
+                            <h3><a href="@url">@item.Name</a></h3>
+                            <p class="price">
+                               @if (item.PromotionPrice.HasValue && item.PromotionPrice.Value != 0)
+                               {
+                                <del>@item.Price.ToString("c0")</del>
+                                @item.PromotionPrice.Value.ToString("c0")
+                               }
+                               else
+                               {
+                                @item.Price.ToString("c0")
+                               }
+                            </p>
+                        </div>
+                        <!-- /.text -->
+                    </div>
+                    <!-- /.product -->
+                </div>
+            }
+
+        </div>
+        <!-- /.product-slider -->
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /#hot -->
+<!-- *** HOT END *** -->

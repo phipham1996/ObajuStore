@@ -19,7 +19,9 @@ namespace ObajuStore.Service
 
         IEnumerable<ProductCategory> GetParentProductCategory();
 
-        IEnumerable<ProductCategory> GetAllPaging(string q, int page, int pageSize, out int totalRow);
+        IEnumerable<ProductCategory> GetByDisplayOrder();
+
+        IEnumerable<ProductCategory> GetAllPaging(string q, int page, int pageSize, out int totalRow, bool isDisplayOrder = false);
 
         IEnumerable<ProductCategory> GetAll(string keyword);
 
@@ -87,20 +89,34 @@ namespace ObajuStore.Service
                 return _productCategoryRepository.GetAll();
         }
 
-        public IEnumerable<ProductCategory> GetAllPaging(string q, int page, int pageSize, out int totalRow)
+        public IEnumerable<ProductCategory> GetAllPaging(string q, int page, int pageSize, out int totalRow, bool isDisplayOrder = false)
         {
             var query = _productCategoryRepository.GetAll();
-            if (!string.IsNullOrEmpty(q))
-                query = query.Where(x => x.Name.ToLower().Contains(q.ToLower()) || x.Description.ToLower().Contains(q.ToLower()));
-            totalRow = query.Count();
-
-            return query.OrderByDescending(x => x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize);
+            if (isDisplayOrder)
+            {
+                query = _productCategoryRepository.GetAll();
+                totalRow = query.Count();
+                return query.OrderBy(x => x.DisplayOrder).Skip((page - 1) * pageSize).Take(pageSize);
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(q))
+                    query = query.Where(x => x.Name.ToLower().Contains(q.ToLower()) || x.Description.ToLower().Contains(q.ToLower())).OrderByDescending(x => x.CreatedDate);
+                totalRow = query.Count();
+                return query.OrderByDescending(x => x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize);
+            }
         }
 
         public IEnumerable<ProductCategory> GetParentProductCategory()
         {
             var category = _productCategoryRepository.GetMulti(x => x.ParentID == null || x.ParentID < 1);
             return category;
+        }
+
+        public IEnumerable<ProductCategory> GetByDisplayOrder()
+        {
+            var query = _productCategoryRepository.GetMulti(x => x.Status).OrderBy(x => x.DisplayOrder);
+            return query;
         }
     }
 }

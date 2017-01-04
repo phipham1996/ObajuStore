@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ObajuStore.Web.Models.ProductViewModel>
+
+<!-- *** GET INSPIRED ***
+_________________________________________________________ -->
+<div class="container" data-animate="fadeInUpBig">
+    <div class="col-md-12">
+        <div class="box slideshow">
+            <h3>Nguồn cảm hứng</h3>
+            <p class="lead">Lấy cảm hứng từ thiết kế đẳng cấp thế giới của chúng tôi</p>
+            <div id="get-inspired" class="owl-carousel owl-theme">
+                @if (Model.Count() <= 0)
+                {
+                    <h4 class="text-warning text-center"> Dữ liệu đang cập nhập <i class="fa fa-spinner fa-spin"></i></h4>
+                }
+                @foreach (var item in Model)
+                {
+                    <div class="item">
+                        <a href="javascript:void();">
+                            <img src="@item.Image" alt="@item.Name" class="img-responsive">
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- *** GET INSPIRED END *** -->

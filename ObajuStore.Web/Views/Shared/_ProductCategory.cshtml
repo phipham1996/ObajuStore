@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<ObajuStore.Web.Models.ProductCategoryViewModel>
-    @using ObajuStore.Web.Infrastructure.Extensions
-@{ 
+@using ObajuStore.Web.Infrastructure.Extensions
+@{
     MenuHelper menuHelper = new MenuHelper();
 }
 @foreach (var parent in Model)
@@ -11,31 +11,31 @@
             <li>
                 <div class="yamm-content">
                     <div class="row">
-                        @{ 
+                        @{
                             var childs = menuHelper.GetChildByID(parent.ID);
                         }
-                       @foreach (var child in childs)
-                       {
-                        <div class="col-sm-3">
-                            <h5>@child.Name</h5>
-                            @{
-                                var childs2 = menuHelper.GetChildByID(child.ID);
-                            }
-                            <ul>
-                                @foreach (var child2 in childs2)
-                                {
-                                    <li>
-                                        <a href="category.html">@child2.Name</a>
-                                    </li>
+                        @foreach (var child in childs)
+                        {
+                            <div class="col-sm-3">
+                                <h5>@child.Name</h5>
+                                @{
+                                    var childs2 = menuHelper.GetChildByID(child.ID);
                                 }
-                                
-                            </ul>
-                        </div>
-                       }
+                                <ul>
+                                    @foreach (var child2 in childs2)
+                                    {
+                                        <li>
+                                            <a href="/danh-muc/@(child2.Alias)-@(child2.ID).htm">@child2.Name</a>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </div>
+                                    }
                     </div>
                 </div>
                 <!-- /.yamm-content -->
             </li>
         </ul>
     </li>
-}
+ }

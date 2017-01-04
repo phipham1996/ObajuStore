@@ -204,6 +204,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductCategoryController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -233,6 +234,7 @@
     <Compile Include="Models\ProductTagViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
+    <Compile Include="Models\SidebarViewModel.cs" />
     <Compile Include="Models\SlideViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Models\TrackOrderViewModel.cs" />
@@ -244,6 +246,7 @@
   <ItemGroup>
     <Content Include="Assets\Admin\js\alertSetting.js" />
     <Content Include="Assets\Admin\css\custom.css" />
+    <Content Include="Assets\Admin\js\controllers\productController.js" />
     <Content Include="Assets\Admin\js\deleteCategory.js" />
     <Content Include="Assets\Admin\js\deleteProduct.js" />
     <Content Include="Assets\Admin\js\deleteRole.js" />
@@ -2339,6 +2342,11 @@
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Shared\_ProductCategory.cshtml" />
     <Content Include="Views\Shared\_TopCategories.cshtml" />
+    <Content Include="Views\Shared\_ProductHotThisWeek.cshtml" />
+    <Content Include="Views\Shared\_getInspired.cshtml" />
+    <Content Include="Views\Product\ProductByCategory.cshtml" />
+    <Content Include="Views\Shared\_SidebarCategories.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\" />
@@ -2352,8 +2360,6 @@
     <Folder Include="Assets\Libs\ckfinder\plugins\fileeditor\codemirror\mode\sql\" />
     <Folder Include="Assets\UploadedFiles\" />
     <Folder Include="Common\" />
-    <Folder Include="Libs\" />
-    <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Footer\" />
     <Folder Include="Views\ProductCategory\" />
