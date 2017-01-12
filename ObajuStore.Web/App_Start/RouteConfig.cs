@@ -17,6 +17,25 @@ namespace ObajuStore.Web
             );
 
             routes.MapRoute(
+              name: "Product Design",
+              url: "thiet-ke-ao.htm",
+              defaults: new { controller = "ProductDesign", action = "Index", id = UrlParameter.Optional },
+              namespaces: new string[] { "ObajuStore.Web.Controllers" }
+          );
+            routes.MapRoute(
+              name: "AR_Controller",
+              url: "thu-do-online.htm",
+              defaults: new { controller = "ProductDesign", action = "WearOnline", id = UrlParameter.Optional },
+              namespaces: new string[] { "ObajuStore.Web.Controllers" }
+          );
+            routes.MapRoute(
+              name: "Product Design Doc",
+              url: "huong-dan-thiet-ke.htm",
+              defaults: new { controller = "ProductDesign", action = "DesignDocument", id = UrlParameter.Optional },
+              namespaces: new string[] { "ObajuStore.Web.Controllers" }
+          );
+
+            routes.MapRoute(
                name: "Contact",
                url: "lien-he.htm",
                defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional },

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Thử áo của bạn";
+    Layout = null;
+}
+<link rel="stylesheet" href="/Assets/Client/css/wearOnline.css">
+
+<div class="demo-frame">
+    <div class="demo-container">
+        <video id="video" width="600" height="450" preload="none" autoplay loop muted controls></video>
+        <canvas id="canvas" width="600" height="450"></canvas>
+    </div>
+</div>
+@{ 
+    var imgUrl = (string)Session["imgUrl"];
+    if (imgUrl == null)
+    {
+        imgUrl = "/Assets/Client/img/mat-truoc.png";
+    }
+}
+<img hidden src="@imgUrl" id="imgUrl" />
+
+<script src="~/Assets/Client/js/jquery-1.11.0.min.js"></script>
+<script src="/Assets/Libs/trackingjs/build/tracking-min.js"></script>
+<script src="/Assets/Libs/trackingjs/build/dat.gui.min.js"></script>
+<script src="/Assets/Libs/trackingjs/examples/assets/stats.min.js"></script>
+<script src="/Assets/Libs/trackingjs/examples/assets/color_camera_gui.js"></script>
+<script src="~/Assets/Client/js/wearOnline.js"></script>
+

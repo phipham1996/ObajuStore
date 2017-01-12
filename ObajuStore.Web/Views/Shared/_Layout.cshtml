@@ -8,7 +8,7 @@
     <meta name="googlebot" content="index,follow,snippet,archive">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Obaju Store">
-    <meta name="author" content="Thâm - Phạm Nhật Phi - Lương Hữu Mạnh">
+    <meta name="author" content="Thâm - Phạm Nhật Phi">
     <meta name="keywords" content="Obaju Store">
 
     <title>
@@ -20,7 +20,6 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
 
     <!-- styles -->
-    <link href="~/Assets/Client/css/font-awesome.css" rel="stylesheet">
     <link href="~/Assets/Client/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Assets/Client/css/animate.min.css" rel="stylesheet">
     <link href="~/Assets/Client/css/owl.carousel.css" rel="stylesheet">
@@ -34,8 +33,9 @@
 
     <script src="~/Assets/Client/js/respond.min.js"></script>
 
-    <link rel="shortcut icon" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
 
+    @RenderSection("styles", required: false)
 
 
 </head>
@@ -49,7 +49,7 @@
             <div class="col-md-6 offer" data-animate="fadeInDown">
                 <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Giảm giá</a>  <a href="#">Có 12 sản phẩm đang giảm giá</a>
             </div>
-           @Html.Partial("_LoginPartial")
+            @Html.Partial("_LoginPartial")
         </div>
 
     </div>
@@ -88,9 +88,32 @@
                     <li class="@Html.IsSelected("Home","Index")">
                         <a href="/">Trang chủ</a>
                     </li>
-                    
-                    @{Html.RenderAction("Index", "ProductCategory");}
 
+                    @{Html.RenderAction("Index", "ProductCategory");}
+                    <li class="dropdown yamm-fw">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"> Thiết kế <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content">
+                                    <div class="row">
+
+                                        <div class="col-sm-3">
+                                            <h5>Thiết kế áo online</h5>
+                                            <ul>
+                                                <li>
+                                                    <a href="/thiet-ke-ao.htm"> Vào thiết kế</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/huong-dan-thiet-ke.htm"> Hướng dẫn thiết kế</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.yamm-content -->
+                            </li>
+                        </ul>
+                    </li>
                     <li class="@Html.IsSelected("About","Index")">
                         <a href="/gioi-thieu.html">Giới thiệu</a>
                     </li>
@@ -299,6 +322,8 @@
     _________________________________________________________ -->
     <script src="~/Assets/Client/js/jquery-1.11.0.min.js"></script>
     <script src="~/Assets/Client/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/d78055b358.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Assets/Client/js/jquery.cookie.js"></script>
     <script src="~/Assets/Client/js/waypoints.min.js"></script>
     <script src="~/Assets/Client/js/modernizr.js"></script>
@@ -306,6 +331,7 @@
     <script src="~/Assets/Client/js/owl.carousel.min.js"></script>
     <script src="~/Assets/Client/js/front.js"></script>
 
+    @RenderSection("scripts", required: false)
 
 </body>
 

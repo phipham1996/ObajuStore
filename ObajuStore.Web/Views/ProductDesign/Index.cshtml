@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Thiết kế áo theo cách của bạn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">Trang chủ</a>
+        </li>
+        <li>
+            Thiết kế áo online
+        </li>
+    </ul>
+
+</div>
+@if (!string.IsNullOrEmpty(ViewBag.AlertString))
+{
+    <div class="col-md-12" data-loading-text="đang tải...">
+        <div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Opps!</strong> @ViewBag.AlertString <a href="/login.htm"><i class="fa fa-sign-in"></i><strong>Đăng nhập</strong></a>
+        </div>
+    </div>
+}
+<div class="col-md-3">
+    <div class="btn-group-vertical" role="group" aria-label="">
+        <button class="btn btn-default btn-block">
+            <i class="fa fa-file-text pull-left"></i>Thêm chữ
+        </button>
+        <button class="btn btn-default btn-block">
+            <i class="fa fa-picture-o pull-left"></i>Chọn hình mẫu
+        </button>
+        <button class="btn btn-default btn-block">
+            <i class="fa fa-external-link pull-left"></i>Lưu thành ảnh
+        </button>
+        <button class="btn btn-default btn-block" id="wearOnline">
+            <i class="fa fa-user-md pull-left"></i>Mặc thử
+        </button>
+        <button class="btn btn-primary btn-block">
+            <i class="fa fa-save pull-left"></i>Lưu lại
+        </button>
+        <hr />
+    </div>
+</div>
+
+<i class="fa fa-spinner fa-spin fa-4x text-center" id="loading"></i>
+<div class="col-md-6" id="all-canvas">
+    <canvas id="mat-truoc-canvas" style="background-color: #FFF;"></canvas>
+    <canvas id="mat-sau-canvas" style="background-color: #FFF;"></canvas>
+    <canvas id="mat-ngang-trai-canvas" style="background-color: #FFF;"></canvas>
+    <canvas id="mat-ngang-phai-canvas" style="background-color: #FFF;"></canvas>
+</div>
+<div class="col-md-3">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" class="non-decoration" data-parent="#accordion" href="#collapse1">
+                        Tùy chọn
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                    commodo consequat.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.col-md-9 -->
+
+<div class="col-md-12">
+    <div class="row" id="productMain">
+        <div class="inline col-md-offset-4">
+            <img src="/Assets/Client/img/mat-truoc.png" id="mat-truoc" onclick="setImage('mat-truoc')" class="thumbnail-image" width="70" />
+            <img src="/Assets/Client/img/mat-sau.png" id="mat-sau" onclick="setImage('mat-sau')" class="thumbnail-image" width="70" />
+            <img src="~/Assets/Client/img/mat-ngang-trai.png" id="mat-ngang-trai" onclick="setImage('mat-ngang-trai')" class="thumbnail-image" width="90" />
+            <img src="~/Assets/Client/img/mat-ngang-phai.png" id="mat-ngang-phai" onclick="setImage('mat-ngang-phai')" class="thumbnail-image" width="90" />
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Assets/Client/js/productDesign.js"></script>
+}
+
+
