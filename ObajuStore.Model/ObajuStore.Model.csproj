@@ -81,8 +81,6 @@
     <Compile Include="Models\SupportOnline.cs" />
     <Compile Include="Models\SystemConfig.cs" />
     <Compile Include="Models\Tag.cs" />
-    <Compile Include="Models\TrackOrder.cs" />
-    <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VisitorStatistic.cs" />
     <Compile Include="Models\Wishlist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

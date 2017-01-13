@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201612280437256_AddIsDeleteColToTables.Designer.cs">
       <DependentUpon>201612280437256_AddIsDeleteColToTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701131102220_UpdateDBTables.cs" />
+    <Compile Include="Migrations\201701131102220_UpdateDBTables.Designer.cs">
+      <DependentUpon>201701131102220_UpdateDBTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ObajuStoreDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,8 +117,6 @@
     <Compile Include="Repositories\SupportOnlineRepository.cs" />
     <Compile Include="Repositories\SystemConfigRepository.cs" />
     <Compile Include="Repositories\TagRepository.cs" />
-    <Compile Include="Repositories\TrackOrderRepository.cs" />
-    <Compile Include="Repositories\VehicleRepository.cs" />
     <Compile Include="Repositories\VisitorStatisticRepository.cs" />
     <Compile Include="Repositories\WishlistRepository.cs" />
   </ItemGroup>
@@ -150,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612280437256_AddIsDeleteColToTables.resx">
       <DependentUpon>201612280437256_AddIsDeleteColToTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701131102220_UpdateDBTables.resx">
+      <DependentUpon>201701131102220_UpdateDBTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -238,8 +238,6 @@
     <Compile Include="Models\SidebarViewModel.cs" />
     <Compile Include="Models\SlideViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
-    <Compile Include="Models\TrackOrderViewModel.cs" />
-    <Compile Include="Models\VehicleViewModel.cs" />
     <Compile Include="Models\ViewCounterViewModel.cs" />
     <Compile Include="Models\WishlistViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

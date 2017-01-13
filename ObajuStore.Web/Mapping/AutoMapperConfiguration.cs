@@ -27,8 +27,6 @@ namespace ObajuStore.Web.Mappings
                 x.CreateMap<Footer, FooterViewModel>();
                 x.CreateMap<Page, PageViewModel>();
                 x.CreateMap<Wishlist, WishlistViewModel>();
-                x.CreateMap<Vehicle, VehicleViewModel>();
-                x.CreateMap<TrackOrder, TrackOrderViewModel>();
                 x.CreateMap<ApplicationRole, ApplicationRoleViewModel>();
                 x.CreateMap<ApplicationUser, ApplicationUserViewModel>();
             });

@@ -55,6 +55,5 @@ namespace ObajuStore.Model.Models
 
         public virtual IEnumerable<OrderDetail> OrderDetails { get; set; }
 
-        public virtual IEnumerable<TrackOrder> TrackOrders { get; set; }
     }
 }
