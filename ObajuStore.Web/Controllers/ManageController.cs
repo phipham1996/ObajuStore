@@ -11,6 +11,7 @@ using ObajuStore.Web.App_Start;
 using ObajuStore.Service;
 using AutoMapper;
 using ObajuStore.Model.Models;
+using ObajuStore.Helpers.Common;
 
 namespace ObajuStore.Web.Controllers
 {
@@ -186,6 +187,9 @@ namespace ObajuStore.Web.Controllers
                 if (result.Succeeded)
                 {
                     var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    MailHelper.SendMail(user.Email, "Kích hoạt tài khoản Obaju Store", "Kích hoạt tài khoản của bạn bằng cách <a href=\"" + callbackUrl + "\">click vào đây.</a>");
                     if (user != null)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

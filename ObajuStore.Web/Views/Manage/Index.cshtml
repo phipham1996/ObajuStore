@@ -28,7 +28,10 @@
                 </tr>
                 <tr>
                     <td>Ngày tham gia</td>
-                    <td>@user.CreatedDate.Value.ToShortDateString()</td>
+                    <td>
+                        @if (user.CreatedDate.HasValue)
+                        { user.CreatedDate.Value.ToShortDateString(); }
+                    </td>
                 </tr>
                 <tr>
                     <td>Mật khẩu</td>
