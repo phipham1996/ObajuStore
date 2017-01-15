@@ -10,6 +10,13 @@ namespace ObajuStore.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+             name: "Shopping Cart Index",
+             url: "gio-hang-cua-ban.htm",
+             defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+             namespaces: new string[] { "ObajuStore.Web.Controllers" }
+         );
+
+            routes.MapRoute(
                 name: "Manage",
                 url: "tai-khoan.htm",
                 defaults: new { controller = "Manage", action = "Index", id = UrlParameter.Optional },

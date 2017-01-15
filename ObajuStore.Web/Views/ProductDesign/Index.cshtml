@@ -29,9 +29,10 @@
         <button class="btn btn-default btn-block">
             <i class="fa fa-file-text pull-left"></i>Thêm chữ
         </button>
-        <button class="btn btn-default btn-block">
+        <button class="btn btn-default btn-block" id="btnPickImage">
             <i class="fa fa-picture-o pull-left"></i>Chọn hình mẫu
         </button>
+        <input type="hidden" id="txtImage" />
         <button class="btn btn-default btn-block">
             <i class="fa fa-external-link pull-left"></i>Lưu thành ảnh
         </button>
@@ -87,7 +88,9 @@
 </div>
 
 @section scripts{
+    <script src="~/Assets/Client/plugins/ckfinder/ckfinder.js"></script>
     <script src="~/Assets/Client/js/productDesign.js"></script>
+    <script src="~/Assets/Client/js/imageEditor.js"></script>
 }
 
 

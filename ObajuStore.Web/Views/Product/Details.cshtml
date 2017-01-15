@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var relatedProducts = (IEnumerable<ObajuStore.Web.Models.ProductViewModel>)ViewBag.RelatedProducts;
 }
-
+@section scripts{
+    <script src="~/Assets/Client/js/addToCart.js"></script>
+}
 <div class="col-md-12">
     <ul class="breadcrumb">
         <li>
@@ -67,8 +69,8 @@
                     </p>
 
                     <p class="text-center buttons">
-                        <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
-                        <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Yêu thích</a>
+                        <a href="#" id="add-to-cart" data-id="@Model.ID" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
+                        <a href="#" id="add-to-wishlist" data-id="@Model.ID" class="btn btn-default"><i class="fa fa-heart"></i> Yêu thích</a>
                     </p>
 
 
