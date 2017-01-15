@@ -7,13 +7,13 @@ namespace ObajuStore.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addBioToAppUser : IMigrationMetadata
+    public sealed partial class InitialDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addBioToAppUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612211646468_addBioToAppUser"; }
+            get { return "201701150746035_InitialDB"; }
         }
         
         string IMigrationMetadata.Source

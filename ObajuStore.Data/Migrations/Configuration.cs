@@ -46,7 +46,7 @@
                     UserName = adminUsername,
                     Email = adminUsername,
                     EmailConfirmed = true,
-                    BirthDay = Convert.ToDateTime("15/09/1996"),
+                    BirthDay = DateTime.ParseExact("15/09/1996", "dd/MM/yyyy", null),
                     Gender = "Nam",
                     Image = CommonConstants.DefaultAvatar,
                     FullName = "David Thâm",
